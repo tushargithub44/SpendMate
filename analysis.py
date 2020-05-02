@@ -14,10 +14,11 @@ month_name=['jan','feb','mar','apr','may']
 lis=[]
 expens=[]
 cursor.execute("select sum(amount) from incomeee")
-sum_total = cursor.fetchone()[0]
-if(sum_total== 'None'):
-    sum_total=str(0)
-print(sum_total)
+sum1 = cursor.fetchone()[0]
+if(sum1=='None'):
+    sum1=str(0)
+sum_total = sum1
+print("sum:"+str(sum_total))
 for i in range(1,5):
     cursor.execute("select sum(amount) from incomeee where month= '%d'"%i)
     sum_mon=cursor.fetchone()[0]
@@ -28,11 +29,17 @@ for i in range(1,5):
     if(st == 'None'):
         st=str(0)
     print("price:"+st)
-    perc =float((int(st)/int(sum_total))*100)
-    print("per:"+str(perc))
-    print(st)
-    lis.append(month_name[i])
-    expens.append(perc)
+    if sum_total==0:
+        lis.append(month_name[i])
+        perc=0.0
+        expens.append(perc)
+    else:
+        perc =float((int(st)/sum_total)*100)
+        print("per:"+str(perc))
+        print(st)
+        lis.append(month_name[i])
+        expens.append(perc)
+    
 
 
 

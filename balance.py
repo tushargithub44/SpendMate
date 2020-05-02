@@ -14,7 +14,11 @@ check2=0
 cursor.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='income';")
 if cursor.fetchone()[0]==1 : 
     cursor.execute("select sum(amount) from incomeee")
-    sum_inc = cursor.fetchone()[0]
+    t = cursor.fetchone()[0]
+    if(t=='None'):
+        t=str(0)
+        sum_inc=int(t)
+
     
 else :
     print('Table does not exists.')
@@ -24,8 +28,10 @@ cursor.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='
 
 if cursor.fetchone()[0]==1 : 
     cursor.execute("select sum(amount) from expense")
-    sum_exp = cursor.fetchone()[0]
-    
+    t = cursor.fetchone()[0]
+    if(t=='None'):
+        t=str(0)
+        sum_exp=int(t)
 else :
     print('Table does not exists.')
     sum_exp=0

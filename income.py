@@ -9,15 +9,17 @@ from balance import *
 
 db = sqlite3.connect('myspendmate.db')
 cursor = db.cursor()
-cursor.execute("CREATE TABLE IF NOT EXISTS income (amount INT NOT NULL, date TEXT NOT NULL, description TEXT , category TEXT NOT NULL ,account_type TEXT NOT NULL,day INT NOT NULL,month INT NOT NULL,year INT NOT NULL)")
-cursor.execute("select sum(amount) from income")
+cursor.execute("CREATE TABLE IF NOT EXISTS incomeee (amount INT NOT NULL, date TEXT NOT NULL, description TEXT , category TEXT NOT NULL ,account_type TEXT NOT NULL,day INT NOT NULL,month INT NOT NULL,year INT NOT NULL)")
+cursor.execute("select sum(amount) from incomeee")
 sum1 = cursor.fetchone()[0]
+if(sum1=='None'):
+    sum1=str(0)
+
 print(sum1)
 cursor.close()
 db.commit()
 db.close()
-date_selected=''
-
+date_selected=None
 
 
 
@@ -48,36 +50,38 @@ def callincome(root):
         label_2 = Label(income, text="Select Date",width=20,font=("bold", 10))
         label_2.place(x=60,y=120)
         def dateSelector():
-                def print_sel():
-                    dateselected = cal.selection_get()
-                    date_selected=dateselected
-                    print(dateselected)
-                    date = str(dateselected)
-                    print(date[6])
-                    labelstatus = Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
-                    label_3 = Label(income, text=dateselected,width=20,font=("bold", 10))
-                    label_3.place(x=310,y=120)
-                    # cal.see(datetime.date(year=2016, month=2, day=5))
-                    date = str(cal.selection_get())
+                
+            def print_sel():
+                global date_selected 
+                dateselected = cal.selection_get()
+                date_selected=dateselected
+                print(dateselected)
+                date = str(dateselected)
+                print(date[6])
+                labelstatus = Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
+                label_3 = Label(income, text=dateselected,width=20,font=("bold", 10))
+                label_3.place(x=310,y=120)
+                # cal.see(datetime.date(year=2016, month=2, day=5))
+                date = str(cal.selection_get())
                     
                     
 
-                top = Toplevel(income)
-                # top.geometry('500x500')
-                import datetime
-                today = datetime.date.today()
+            top = Toplevel(income)
+            # top.geometry('500x500')
+            import datetime
+            today = datetime.date.today()
 
-                mindate = datetime.date(year=2018, month=1, day=21)
-                maxdate = today + datetime.timedelta(days=5)
+            mindate = datetime.date(year=2018, month=1, day=21)
+            maxdate = today + datetime.timedelta(days=5)
                 # print(mindate, maxdate)
 
-                cal = Calendar(top, font="Arial 14", selectmode='day', locale='en_US',
+            cal = Calendar(top, font="Arial 14", selectmode='day', locale='en_US',
                             mindate=mindate, maxdate=maxdate, disabledforeground='red',
                             cursor="hand1", year=2018, month=2, day=5)
-                cal.pack(fill="both", expand=True)
-                incomebtn2 = Button(top, text="Select", command=print_sel).pack() 
-                print("Date_newyf:"+date_selected)
-                return date_selected
+            cal.pack(fill="both", expand=True)
+            incomebtn2 = Button(top, text="Select", command=print_sel).pack() 
+            print("Date_newyf:"+str(date_selected))
+            return date_selected
                 # tk.top.destroy()
 
 
@@ -124,18 +128,18 @@ def callincome(root):
             t1 =printamount()
             t5= date_selected
             print(t5)
-            
-            # day= month[8]+month[9]
-            # mon= month[5]+month[6]
-            # yr= month[0]+month[1]+month[2]+month[3]
-            # print(month[6])
+            month = str(t5)
+            day= month[8]+month[9]
+            mon= month[5]+month[6]
+            yr= month[0]+month[1]+month[2]+month[3]
+            print(month[6])
             t2 =printdescription()
             t3 =printcategory()
             t4 = printaccount()
             db = sqlite3.connect('myspendmate.db')
             cursor = db.cursor()
-            cursor.execute("insert into income values('%d','%s','%s','%s','%s')"%(int(t1),t5,t2,t3,t4))
-            cursor.execute("select sum(amount) from income")
+            cursor.execute("insert into incomeee values('%d','%s','%s','%s','%s','%d','%d','%d')"%(int(t1),t5,t2,t3,t4,int(day),int(mon),int(yr)))
+            cursor.execute("select sum(amount) from incomeee")
             sum1 = cursor.fetchone()[0]
             rootlabel.config(text="Total Income : "+str(sum1))
             cursor.close()
