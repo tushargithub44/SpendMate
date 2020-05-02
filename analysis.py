@@ -3,6 +3,48 @@ from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
+import sqlite3
+
+sum_expense=0
+sum_amount=0
+sum_total=0
+db = sqlite3.connect('myspendmate.db')
+cursor = db.cursor()
+month_name=['jan','feb','mar','apr','may']
+lis=[]
+expens=[]
+cursor.execute("select sum(amount) from incomeee")
+sum_total = cursor.fetchone()[0]
+if(sum_total== 'None'):
+    sum_total=str(0)
+print(sum_total)
+for i in range(1,5):
+    cursor.execute("select sum(amount) from incomeee where month= '%d'"%i)
+    sum_mon=cursor.fetchone()[0]
+    st=str(sum_mon)
+    print("Initial:"+st)
+   
+    
+    if(st == 'None'):
+        st=str(0)
+    print("price:"+st)
+    perc =float((int(st)/int(sum_total))*100)
+    print("per:"+str(perc))
+    print(st)
+    lis.append(month_name[i])
+    expens.append(perc)
+
+
+
+
+for i in expens:
+    print(i)
+    print("h")
+
+    
+cursor.close()
+db.commit()
+db.close()
 
 
 def callAnalysis(root):
@@ -15,8 +57,8 @@ def callAnalysis(root):
 
     def printpie():
         # Data to plot
-        labels = '', 'C++', 'Ruby', 'Java'
-        sizes = [215, 130, 245, 210]
+        labels = lis
+        sizes = expens
         colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
         explode = (0.1, 0, 0, 0)  # explode 1st slice
 

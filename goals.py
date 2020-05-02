@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
+import sqlite3
 
 
 def callGoals(root):
@@ -20,7 +21,9 @@ def callGoals(root):
 
         label_1 = Label(Goals, text="Your Goals",width=20,font=("bold", 10))
         label_1.place(x=170,y=20)
+        
 
+  
         
         def SetGoals():
             print('hello')

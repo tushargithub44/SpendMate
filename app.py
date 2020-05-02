@@ -14,12 +14,11 @@ from menuOthers import *
 
 root = Tk()  
 root.geometry("900x600")  
-  
+   
 
 tlabel = Label(root, text="Welcome to SpendMate")  
 tlabel.grid(columnspan = 12,pady = 2)  
 tlabel.config(font=("ubuntu", 25))
-
 
 menubar = Menu(root)  
 # Function menu
@@ -45,6 +44,7 @@ callAnalysis(root)
 
 # Goals Section of Main Window
 callGoals(root)
+
 
 
 
