@@ -1,16 +1,21 @@
-from tkinter import *  
+from tkinter import * 
 from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
+
 from balance import *
 from income import *
-from budget import *
+# from budget import *
 from goals import *
-from analysis import *
+# from analysis import *
 from expense import *
 from menuFunctions import *
 from menuOthers import *
+
+
+
+
 
 root = Tk()  
 root.geometry("900x600")  
@@ -37,10 +42,10 @@ callincome(root)
 callExpense(root)
 
 # Budget Section of Main Window
-callBudget(root)
+# callBudget(root)
 
 # Analysis Section of Main Window
-callAnalysis(root)
+# callAnalysis(root)
 
 # Goals Section of Main Window
 callGoals(root)

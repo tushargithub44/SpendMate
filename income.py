@@ -1,16 +1,16 @@
 from tkinter import *  
+import tkinter as tk
 from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 import sqlite3
-import tkinter as tk
 from balance import *
 
 db = sqlite3.connect('myspendmate.db')
 cursor = db.cursor()
-cursor.execute("CREATE TABLE IF NOT EXISTS incomeee (amount INT NOT NULL, date TEXT NOT NULL, description TEXT , category TEXT NOT NULL ,account_type TEXT NOT NULL,day INT NOT NULL,month INT NOT NULL,year INT NOT NULL)")
-cursor.execute("select sum(amount) from incomeee")
+# cursor.execute("CREATE TABLE IF NOT EXISTS incomeee (amount INT NOT NULL, date TEXT NOT NULL, description TEXT , category TEXT NOT NULL ,account_type TEXT NOT NULL,day INT NOT NULL,month INT NOT NULL,year INT NOT NULL)")
+cursor.execute("select sum(amount) from income")
 sum1 = cursor.fetchone()[0]
 if(sum1=='None'):
     sum1=str(0)
@@ -28,7 +28,7 @@ def callincome(root):
     labelframe2.grid(row=1,column = 3, columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30)
 
-    rootlabel = Label(labelframe2, text="Total Income : "+str(sum1))  
+    rootlabel = Label(labelframe2, text="Total Income : " + str(sum1))  
     rootlabel.grid()
 
     def AddIncome():
@@ -80,7 +80,7 @@ def callincome(root):
                             cursor="hand1", year=2018, month=2, day=5)
             cal.pack(fill="both", expand=True)
             incomebtn2 = Button(top, text="Select", command=print_sel).pack() 
-            print("Date_newyf:"+str(date_selected))
+            print("Date_new:"+str(date_selected))
             return date_selected
                 # tk.top.destroy()
 
@@ -125,23 +125,27 @@ def callincome(root):
         accountbox.current(0)
 
         def put():
-            t1 =printamount()
-            t5= date_selected
-            print(t5)
-            month = str(t5)
-            day= month[8]+month[9]
-            mon= month[5]+month[6]
-            yr= month[0]+month[1]+month[2]+month[3]
-            print(month[6])
-            t2 =printdescription()
-            t3 =printcategory()
+            t1 = printamount()
+            t2 = printdescription()
+            t3 = printcategory()
             t4 = printaccount()
+            t5 = date_selected
+            print('date selected' + str(t5))
+            info = str(t5)
+            day = info[8]+info[9]
+            mon = info[5]+info[6]
+            yr = info[0]+info[1]+info[2]+info[3]
+            print('day: ' + str(day))
+            print('mon: ' + str(mon))
+            print('yr: ' + str(yr))
             db = sqlite3.connect('myspendmate.db')
             cursor = db.cursor()
-            cursor.execute("insert into incomeee values('%d','%s','%s','%s','%s','%d','%d','%d')"%(int(t1),t5,t2,t3,t4,int(day),int(mon),int(yr)))
-            cursor.execute("select sum(amount) from incomeee")
+            cursor.execute("insert into income values('%d','%s','%s','%s','%s','%d','%d','%d')"%(int(t1),t5,t2,t3,t4,int(day),int(mon),int(yr)))
+            cursor.execute("select sum(amount) from income")
             sum1 = cursor.fetchone()[0]
-            rootlabel.config(text="Total Income : "+str(sum1))
+            if(sum1=='None'):
+                sum1=str(0)
+            rootlabel.config(text="Total Income : " + str(sum1))
             cursor.close()
             db.commit()
             db.close
@@ -185,7 +189,7 @@ def callincome(root):
         income.resizable(False,False)
         db = sqlite3.connect('myspendmate.db')
         cursor = db.cursor()
-        cursor.execute("SELECT amount,date,description,category,account_type FROM incomeee ")
+        cursor.execute("SELECT amount,date,description,category,account_type FROM income ")
         list1 = cursor.fetchall()
         total = cursor.rowcount
          

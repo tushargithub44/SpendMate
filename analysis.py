@@ -10,7 +10,7 @@ sum_amount=0
 sum_total=0
 db = sqlite3.connect('myspendmate.db')
 cursor = db.cursor()
-cursor.execute("select sum(amount) from incomeee")
+cursor.execute("select sum(amount) from income")
 sum1 = cursor.fetchone()[0]
 if(sum1=='None'):
     sum1=str(0)
@@ -20,7 +20,7 @@ cate_cont=[]
 cate_cont_per=[]
 count=-1
 cate_list=[]
-cursor.execute("SELECT * FROM incomeee")
+cursor.execute("SELECT * FROM income")
 list12=cursor.fetchall()
 for j in list12:
     print(j[3])
@@ -56,15 +56,16 @@ lis=[]
 expens=[]
 
 for i in range(1,5):
-    cursor.execute("select sum(amount) from incomeee where month= '%d'"%i)
+    cursor.execute("select sum(amount) from income where month= '%d'"%i)
     sum_mon=cursor.fetchone()[0]
     st=str(sum_mon)
     print("Initial:"+st)
    
     
     if(st == 'None'):
-        st=str(0)
-    print("price:"+st)
+        st=0
+    print("price:"+str(st))
+    
     if sum_total==0:
         lis.append(month_name[i])
         perc=0.0

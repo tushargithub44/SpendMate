@@ -1,20 +1,24 @@
 from tkinter import *  
+import tkinter as tk
 from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 import sqlite3
-import tkinter as tk
+from balance import *
 
 db = sqlite3.connect('myspendmate.db')
 cursor = db.cursor()
-cursor.execute("CREATE TABLE IF NOT EXISTS expense (amount INT NOT NULL, date TEXT NOT NULL, description TEXT , category TEXT NOT NULL ,account_type TEXT NOT NULL)")
+# cursor.execute("CREATE TABLE IF NOT EXISTS income (amount INT NOT NULL, date TEXT NOT NULL, description TEXT , category TEXT NOT NULL ,account_type TEXT NOT NULL,day INT NOT NULL,month INT NOT NULL,year INT NOT NULL)")
 cursor.execute("select sum(amount) from expense")
 sum1 = cursor.fetchone()[0]
+if(sum1=='None'):
+    sum1=str(0)
 print(sum1)
 cursor.close()
 db.commit()
 db.close()
+date_selected=None
 
 def callExpense(root):
     labelframe1 = LabelFrame(root, text="Expense Comments")  
@@ -43,7 +47,9 @@ def callExpense(root):
         label_2.place(x=60,y=120)
         def dateSelector():
                 def print_sel():
+                    global date_selected
                     dateselected = cal.selection_get()
+                    date_selected=dateselected
                     print(dateselected)
                     labelstatus = Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
                     label_3 = Label(expense, text=dateselected,width=20,font=("bold", 10))
@@ -65,7 +71,8 @@ def callExpense(root):
                             cursor="hand1", year=2018, month=2, day=5)
                 cal.pack(fill="both", expand=True)
                 expensebtn2 = Button(top, text="Select", command=print_sel).pack() 
-                return print_sel()
+                print("Date_new:"+str(date_selected))
+                return date_selected
                 # tk.top.destroy()
 
 
@@ -108,21 +115,31 @@ def callExpense(root):
         accountbox.current(0)
 
         def put():
-            t1 =printamount()
-            t5= dateSelector()
-            t2 =printdescription()
-            t3 =printcategory()
+            t1 = printamount()
+            t2 = printdescription()
+            t3 = printcategory()
             t4 = printaccount()
+            t5 = date_selected
+            print('date selected' + str(t5))
+            info = str(t5)
+            day = info[8]+info[9]
+            mon = info[5]+info[6]
+            yr = info[0]+info[1]+info[2]+info[3]
+            print('day ' + str(day))
+            print('mon ' + str(mon))
+            print('yr ' + str(yr))
             db = sqlite3.connect('myspendmate.db')
             cursor = db.cursor()
-            cursor.execute("insert into expense values('%d','%s','%s','%s','%s')"%(int(t1),t5,t2,t3,t4))
+            cursor.execute("insert into expense values('%d','%s','%s','%s','%s','%d','%d','%d')"%(int(t1),t5,t2,t3,t4,int(day),int(mon),int(yr)))
             cursor.execute("select sum(amount) from expense")
             sum1 = cursor.fetchone()[0]
+            if(sum1=='None'):
+                sum1=str(0)
             rootlabel.config(text="Total Expense : "+str(sum1))
             cursor.close()
             db.commit()
             db.close
-           
+            callbalance(root)
             
         
 
@@ -160,7 +177,7 @@ def callExpense(root):
         cursor.execute("SELECT * FROM expense ")
         list1 = cursor.fetchall()
         total = cursor.rowcount
-         
+        
         for i in list1:
             tv.insert('','end',values=i)
 
