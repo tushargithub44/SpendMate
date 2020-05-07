@@ -4,6 +4,11 @@ from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 
+from databasemaker import *
+
+# Database Maker:
+makedatabase()  
+
 from balance import *
 from income import *
 # from budget import *
