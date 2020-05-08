@@ -6,10 +6,10 @@ from tkinter import messagebox
 import matplotlib.pyplot as plt
 import sqlite3
 from balance import *
+from budget import *
 
 db = sqlite3.connect('myspendmate.db')
 cursor = db.cursor()
-# cursor.execute("CREATE TABLE IF NOT EXISTS income (amount INT NOT NULL, date TEXT NOT NULL, description TEXT , category TEXT NOT NULL ,account_type TEXT NOT NULL,day INT NOT NULL,month INT NOT NULL,year INT NOT NULL)")
 cursor.execute("select sum(amount) from expense")
 sum1 = cursor.fetchone()[0]
 if(sum1=='None'):
@@ -54,7 +54,7 @@ def callExpense(root):
                     labelstatus = Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
                     label_3 = Label(expense, text=dateselected,width=20,font=("bold", 10))
                     label_3.place(x=310,y=120)
-                    cal.see(datetime.date(year=2016, month=2, day=5))
+                    cal.see(datetime.date(year=2020, month=2, day=5))
                     return dateselected
 
                 top = Toplevel(expense)
@@ -68,7 +68,7 @@ def callExpense(root):
 
                 cal = Calendar(top, font="Arial 14", selectmode='day', locale='en_US',
                             mindate=mindate, maxdate=maxdate, disabledforeground='red',
-                            cursor="hand1", year=2018, month=2, day=5)
+                            cursor="hand1", year=2020, month=2, day=5)
                 cal.pack(fill="both", expand=True)
                 expensebtn2 = Button(top, text="Select", command=print_sel).pack() 
                 print("Date_new:"+str(date_selected))
@@ -140,7 +140,7 @@ def callExpense(root):
             db.commit()
             db.close
             callbalance(root)
-            
+            # callBudget(root)
         
 
         # label_1 = Label(expense, text="Payment Recieved?",width=20,font=("bold", 10))
@@ -150,6 +150,8 @@ def callExpense(root):
 
         def AllinOne():
             put()
+            print("After Expense Update Budget----------")
+            callBudget(root)
             expenseexit()
             pass 
 

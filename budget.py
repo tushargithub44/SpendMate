@@ -4,50 +4,56 @@ from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 import sqlite3
+
 tp = 0
 tp1=0
 pe=0.0
 pert=0.0
 po=0
-db = sqlite3.connect('myspendmate.db')
-cursor = db.cursor()
-cursor.execute("CREATE TABLE IF NOT EXISTS budgettt (amount INT NOT NULL, percentage INT NOT NULL)")
-cursor.execute("select count(*) from budgettt")
-if cursor.fetchone()[0]!=0:
-    cursor.execute("SELECT amount FROM budgettt ORDER BY ROWID DESC LIMIT 1")
-    tp = cursor.fetchone()[0]
-    print(tp)
-            
-    cursor.execute("SELECT percentage FROM budgettt ORDER BY ROWID DESC LIMIT 1")
-    tp1 = cursor.fetchone()[0]
-    print(tp1)
-    cursor.execute("select sum(amount) from expense")
-    po = cursor.fetchone()[0]
-    print(po)            
-            
-    cursor.close()
-    db.commit()
-    db.close
-    pe = ((tp - po)*100)/tp
-    print(pe)
-    check =1
-     
 
-cursor.close()
-db.commit()
-db.close()
 
 def callBudget(root):
     budgetframe1 = LabelFrame(root, text="Budget Information")  
     budgetframe1.grid(row=3,column = 0, columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30)
-    
-    if check ==1 :
-        budgetlabel = Label(budgetframe1, text=" TotalBudget :" + str(tp))  
+    db = sqlite3.connect('myspendmate.db')
+    cursor = db.cursor()
+    cursor.execute("select count(*) from budget")
+    if cursor.fetchone()[0]!=0:
+        cursor.execute("SELECT amount FROM budget ORDER BY ROWID DESC LIMIT 1")
+        tp = cursor.fetchone()[0]
+        print('tp------- : ' + str(tp))
+            
+        cursor.execute("SELECT percentage FROM budget ORDER BY ROWID DESC LIMIT 1")
+        tp1 = cursor.fetchone()[0]
+        print('tp1------- : ' + str(tp1))
+
+        cursor.execute("select sum(amount) from expense")
+        po = cursor.fetchone()[0]
+        print('before po' + str(po))
+        if(po == None):
+            po = 0
+        print('po : ' + str(po))            
+            
+        cursor.close()
+        db.commit()
+        db.close
+        pe = (po*100) / tp
+        print('pe : ' + str(pe))
+        check = 1
+    else:
+        check=None
+
+    cursor.close()
+    db.commit()
+    db.close()
+
+    if check == 1:
+        budgetlabel = Label(budgetframe1, text="Total Budget :" + str(tp))  
         budgetlabel.grid()  
-        Spentlabel = Label(budgetframe1, text="Amount Spent :"+ str(po))  
+        Spentlabel = Label(budgetframe1, text="Percentage Set :"+ str(tp1))  
         Spentlabel.grid()  
-        if pe<tp1:
+        if pe>tp1:
             budgetlabel2 = Label(budgetframe1, text="Current amount spend exceeds the budget",bg="red")  
             budgetlabel2.grid()
         else:
@@ -55,13 +61,13 @@ def callBudget(root):
             budgetlabel2.grid()
 
     else:
-        budgetlabel = Label(budgetframe1, text=" TotalBudget :")  
+        budgetlabel = Label(budgetframe1, text=" Total Budget : Not Set")  
         budgetlabel.grid()  
-        Spentlabel = Label(budgetframe1, text="Amount Spent :")  
+        Spentlabel = Label(budgetframe1, text="")  
         Spentlabel.grid()
-        budgetlabel2 = Label(budgetframe1, text="Budget under control")  
+        budgetlabel2 = Label(budgetframe1, text="")  
         budgetlabel2.grid()  
-    amt=0
+    budgetamt=0
 
     def ManageBudget():
         income = Tk()
@@ -95,11 +101,11 @@ def callBudget(root):
             t1 =printamount()
             t2 =printper()
         
-            u1=int(t1)
+            u1 = int(t1)
             u2 = int(t2)
             db = sqlite3.connect('myspendmate.db')
             cursor = db.cursor()
-            cursor.execute("insert into budgettt values('%d','%d')"%(int(t1),int(t2)))
+            cursor.execute("insert into budget values('%d','%d')"%(int(t1),int(t2)))
             
             
             cursor.close()
@@ -110,44 +116,39 @@ def callBudget(root):
        
             
         def get():
-            
             db = sqlite3.connect('myspendmate.db')
             cursor = db.cursor()
             total = cursor.rowcount
-            cursor.execute("SELECT amount FROM budgettt ORDER BY ROWID DESC LIMIT 1")
-            amt = cursor.fetchone()[0]
-            print(amt)
+            cursor.execute("SELECT amount FROM budget ORDER BY ROWID DESC LIMIT 1")
+            budgetamt = cursor.fetchone()[0]
+            print("-------" + str(budgetamt))
             
-            cursor.execute("SELECT percentage FROM budgettt ORDER BY ROWID DESC LIMIT 1")
-            per = cursor.fetchone()[0]
-            print(per)
+            cursor.execute("SELECT percentage FROM budget ORDER BY ROWID DESC LIMIT 1")
+            budgetper = cursor.fetchone()[0]
+            print("-------" + str(budgetper))
             cursor.execute("select sum(amount) from expense")
-            sum_expense = cursor.fetchone()[0]
-            print(sum_expense)            
+            total_expense = cursor.fetchone()[0]
+            if total_expense == None:
+                total_expense = 0
+            print(total_expense)            
             
             cursor.close()
             db.commit()
             db.close
-            perc1 = ((amt - sum_expense)*100)/amt
-            print(perc1)
-            budgetlabel.config(text=" TotalBudget :"+ str(amt))
-            Spentlabel.config(text="Amount Spent :"+ str(sum_expense))
-            if perc1<per:
-                budgetlabel2.config(text="Current amount spend exceeds the budget",bg="red")
+            spentper = (total_expense*100)/budgetamt
+            print(spentper)
+            budgetlabel.config(text="Total Budget :"+ str(budgetamt))
+            Spentlabel.config(text="Percentage Set :"+ str(budgetper))
+            if budgetper<spentper:
+                budgetlabel2.config(text="Current amount spend exceeds the budget", bg="red")
             else:
-                budgetlabel2.config(text="Budget under control",bg='white')
+                budgetlabel2.config(text="Budget under control", bg='white')
+            income.destroy()
 
-              
 
         btn1 = Button(income, text = 'Set', command=put) 
         btn1.place(x = 150, y = 180)
         
-        
-            
-    
-
-    
-
 
     btn1 = Button(budgetframe1, text = 'Manage Budget', command=ManageBudget) 
     btn1.grid()

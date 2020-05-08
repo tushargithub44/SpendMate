@@ -184,7 +184,7 @@ def callincome(root):
         tv.heading(3,text="Description")
         tv.heading(4,text="Category")
         tv.heading(5,text="Account_type")
-        income.geometry('1000x500')
+        income.geometry('1000x100')
         income.title("Income Details")
         income.resizable(False,False)
         db = sqlite3.connect('myspendmate.db')

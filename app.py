@@ -11,7 +11,7 @@ makedatabase()
 
 from balance import *
 from income import *
-# from budget import *
+from budget import *
 from goals import *
 # from analysis import *
 from expense import *
@@ -21,10 +21,9 @@ from menuOthers import *
 
 
 
-
 root = Tk()  
 root.geometry("900x600")  
-   
+root.resizable(width = 1, height = 1)
 
 tlabel = Label(root, text="Welcome to SpendMate")  
 tlabel.grid(columnspan = 12,pady = 2)  
@@ -47,7 +46,7 @@ callincome(root)
 callExpense(root)
 
 # Budget Section of Main Window
-# callBudget(root)
+callBudget(root)
 
 # Analysis Section of Main Window
 # callAnalysis(root)
