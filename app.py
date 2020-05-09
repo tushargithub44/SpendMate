@@ -3,7 +3,6 @@ from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
-
 from databasemaker import *
 
 # Database Maker:
@@ -13,7 +12,7 @@ from balance import *
 from income import *
 from budget import *
 from goals import *
-# from analysis import *
+from analysis import *
 from expense import *
 from menuFunctions import *
 from menuOthers import *
@@ -22,7 +21,7 @@ from menuOthers import *
 
 
 root = Tk()  
-root.geometry("850x600")  
+root.geometry("950x600")  
 root.resizable(False, False)
 
 tlabel = Label(root, text="Welcome to SpendMate")  
@@ -49,7 +48,7 @@ callExpense(root)
 callBudget(root)
 
 # Analysis Section of Main Window
-# callAnalysis(root)
+callAnalysis(root)
 
 # Goals Section of Main Window
 callGoals(root)
