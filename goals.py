@@ -20,11 +20,14 @@ def callGoals(root):
     countgoals = cursor.fetchone()[0]
     if(countgoals=='None'):
         countgoals=str(0)
-    rootlabel = Label(labelframe1, text="Total Goals : " + str(countgoals)) 
+    rootlabel = Label(labelframe1, text="Total Goals : ") 
+    rootlabel.grid(row=3,column = 0)
+    rootlabel1 = Label(labelframe1, text=str(countgoals)) 
+    rootlabel1.grid(row=3,column = 1)
+    rootlabel1.config(font=("Courier", 13))  
     cursor.close()
     db.commit()
-    db.close 
-    rootlabel.grid()  
+    db.close   
 
     # def ManageGoals():
         # Goals = Tk()
@@ -242,7 +245,7 @@ def callGoals(root):
             countgoals = cursor.fetchone()[0]
             if(countgoals=='None'):
                 countgoals=str(0)
-            rootlabel.config(text="Total Goals : " + str(countgoals))
+            rootlabel1.config(text=str(countgoals))
             cursor.close()
             db.commit()
             db.close
@@ -281,7 +284,7 @@ def callGoals(root):
     # btn1 = Button(labelframe1, text = 'Manage Goals', command = ManageGoals) 
     # btn1.grid()
     seegoalbtn = Button(labelframe1, text = 'See Your Goals', command = SeeGoals) 
-    seegoalbtn.grid(row = 2, column = 0,padx=2)
+    seegoalbtn.grid(row = 4, column = 0,padx=2)
 
     addgoalbtn = Button(labelframe1, text = 'Add a Goal', command = SetGoals) 
-    addgoalbtn.grid(row = 2, column = 1,padx=2)
+    addgoalbtn.grid(row = 4, column = 1,padx=2)

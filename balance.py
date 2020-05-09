@@ -4,7 +4,7 @@ from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 import sqlite3
-
+from Currency import *
 
 
 def callbalance(root):
@@ -32,10 +32,16 @@ def callbalance(root):
 
 
     balance = total_income - total_expense
-    print('balance :' + str(balance))
+    CurrencyCurrent = CurrentCurrr()
+    print('balance :' + str(balance) + str(CurrencyCurrent))
     cursor.close()
     db.commit()
     db.close()
 
-    rootlabel = Label(labelframe1, text="Your Current Balance is : " + str(balance) )  
-    rootlabel.grid(pady = 10)  
+    rootlabel = Label(labelframe1, text="Your Current Balance is : ")
+    # rootlabel.config(font=("Courier", 16))  
+    rootlabel.grid(row = 1, column = 0, pady = 10)  
+    print("current" + CurrencyCurrent)
+    rootlabel1 = Label(labelframe1, text=str(balance) + str(CurrencyCurrent))
+    rootlabel1.config(font=("Courier", 13))  
+    rootlabel1.grid(row = 1, column = 1, pady = 10)  

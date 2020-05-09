@@ -4,6 +4,7 @@ from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 import sqlite3
+from Currency import CurrentCurrr
 
 tp = 0
 tp1=0
@@ -13,6 +14,7 @@ po=0
 
 
 def callBudget(root):
+    CurrencyCurrent = CurrentCurrr()
     budgetframe1 = LabelFrame(root, text="Budget Information")  
     budgetframe1.grid(row=3,column = 0, columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30)
@@ -49,10 +51,17 @@ def callBudget(root):
     db.close()
 
     if check == 1:
-        budgetlabel = Label(budgetframe1, text="Total Budget :" + str(tp))  
-        budgetlabel.grid()  
-        Spentlabel = Label(budgetframe1, text="Percentage Set :"+ str(tp1))  
-        Spentlabel.grid()  
+        CurrencyCurrent = CurrentCurrr()
+        budgetlabel = Label(budgetframe1, text="Total Budget :")  
+        budgetlabel.grid(row = 3, column = 0)  
+        budgetlabel1 = Label(budgetframe1, text=str(tp) + CurrencyCurrent)  
+        budgetlabel1.grid(row = 3, column = 1)  
+        budgetlabel1.config(font=("Courier", 13))  
+        Spentlabel = Label(budgetframe1, text="Percentage Set :")  
+        Spentlabel.grid(row = 4, column = 0)  
+        Spentlabel1 = Label(budgetframe1, text=str(tp1) + "%")  
+        Spentlabel1.grid(row = 4, column = 1)
+        Spentlabel1.config(font=("Courier", 13))  
         if pe>tp1:
             budgetlabel2 = Label(budgetframe1, text="Current amount spend exceeds the budget",bg="red")  
             budgetlabel2.grid()
@@ -137,8 +146,8 @@ def callBudget(root):
             db.close
             spentper = (total_expense*100)/budgetamt
             print(spentper)
-            budgetlabel.config(text="Total Budget :"+ str(budgetamt))
-            Spentlabel.config(text="Percentage Set :"+ str(budgetper))
+            budgetlabel1.config(text=str(budgetamt) + CurrencyCurrent)
+            Spentlabel1.config(text=str(budgetper) + "%")
             if budgetper<spentper:
                 budgetlabel2.config(text="Current amount spend exceeds the budget", bg="red")
             else:

@@ -6,6 +6,7 @@ from tkinter import messagebox
 import matplotlib.pyplot as plt
 import sqlite3
 from balance import *
+from Currency import *
 
 db = sqlite3.connect('myspendmate.db')
 cursor = db.cursor()
@@ -28,8 +29,12 @@ def callincome(root):
     labelframe2.grid(row=1,column = 3, columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30)
 
-    rootlabel = Label(labelframe2, text="Total Income : " + str(sum1))  
-    rootlabel.grid()
+    CurrencyCurrent = CurrentCurrr()
+    rootlabel = Label(labelframe2, text="Total Income : " )  
+    rootlabel.grid(row=1, column = 0)
+    rootlabel1 = Label(labelframe2, text= str(sum1) + CurrencyCurrent)  
+    rootlabel1.config(font=("Courier", 13))  
+    rootlabel1.grid(row=1, column = 1)
 
     def AddIncome():
         income = Tk()
@@ -145,7 +150,7 @@ def callincome(root):
             sum1 = cursor.fetchone()[0]
             if(sum1=='None'):
                 sum1=str(0)
-            rootlabel.config(text="Total Income : " + str(sum1))
+            rootlabel1.config(text=str(sum1) + CurrencyCurrent)
             cursor.close()
             db.commit()
             db.close
