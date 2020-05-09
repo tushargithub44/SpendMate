@@ -22,7 +22,7 @@ from menuOthers import *
 
 
 root = Tk()  
-root.geometry("900x600")  
+root.geometry("1030x600")  
 root.resizable(width = 1, height = 1)
 
 tlabel = Label(root, text="Welcome to SpendMate")  

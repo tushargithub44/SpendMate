@@ -192,6 +192,6 @@ def callExpense(root):
                 
     #------------------------------------------------------------------ 
     btn1 = Button(labelframe1, text = 'Add Expense', command = AddExpense) 
-    btn1.grid()
+    btn1.grid(row = 2, column = 0,padx=2)
     btn2 = Button(labelframe1, text = 'Expense Details', command = GetData) 
-    btn2.grid()
+    btn2.grid(row = 2, column = 1,padx=2)
