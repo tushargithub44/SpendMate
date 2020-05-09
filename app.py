@@ -22,8 +22,8 @@ from menuOthers import *
 
 
 root = Tk()  
-root.geometry("1030x600")  
-root.resizable(width = 1, height = 1)
+root.geometry("850x600")  
+root.resizable(False, False)
 
 tlabel = Label(root, text="Welcome to SpendMate")  
 tlabel.grid(columnspan = 12,pady = 2)  
