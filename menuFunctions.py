@@ -29,6 +29,7 @@ def callmenuFunc(menubar):
         def SaveCurrency():
             print(cb.get()) #  Save this to database
             Currency.destroy()
+            messagebox.showinfo("Message","Operation Successful!")  
 
         savebutton = Button(Currency, text = 'Save and Exit',command = SaveCurrency, padx=20, pady=20) 
         savebutton.place(x = 180, y = 320)
