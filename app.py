@@ -4,28 +4,32 @@ from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 from databasemaker import *
-
+from PIL import Image, ImageTk
+import PIL.Image
 # Database Maker:
 makedatabase()  
 
-from balance import *
-from income import *
-from budget import *
-from goals import *
-from analysis import *
-from expense import *
-from menuFunctions import *
-from menuOthers import *
-
+from Main_Window.balance import *
+from Main_Window.income import *
+from Main_Window.budget import *
+from Main_Window.goals import *
+from Main_Window.analysis import *
+from Main_Window.expense import *
+from Menubar.menuFunctions import *
+from Menubar.menuOthers import *
 
 
 
 root = Tk()  
-root.geometry("950x600")  
+root.geometry("900x600")  
 root.resizable(False, False)
 
+img = ImageTk.PhotoImage(PIL.Image.open("SpendMate1.png"))
+panel = tk.Label(root, image = img)
+panel.grid(row = 0,column = 0, columnspan=4)
+
 tlabel = Label(root, text="Welcome to SpendMate")  
-tlabel.grid(columnspan = 12,pady = 2)  
+tlabel.grid(row = 0,column = 1, columnspan = 8,pady = 2)  
 tlabel.config(font=("ubuntu", 25))
 
 menubar = Menu(root)  
@@ -53,10 +57,5 @@ callAnalysis(root)
 # Goals Section of Main Window
 callGoals(root)
 
-
-
-
-# root.rowconfigure(1, weight=1)
-# root.columnconfigure(2, weight=1)
 
 root.mainloop()

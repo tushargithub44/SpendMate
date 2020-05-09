@@ -4,7 +4,7 @@ from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 import sqlite3
-from Currency import CurrentCurrr
+from Main_Window.Currency import CurrentCurrr
 
 tp = 0
 tp1=0

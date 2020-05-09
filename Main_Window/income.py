@@ -5,8 +5,8 @@ from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 import sqlite3
-from balance import *
-from Currency import *
+from Main_Window.balance import *
+from Main_Window.Currency import *
 
 db = sqlite3.connect('myspendmate.db')
 cursor = db.cursor()
@@ -76,13 +76,13 @@ def callincome(root):
             import datetime
             today = datetime.date.today()
 
-            mindate = datetime.date(year=2018, month=1, day=21)
+            mindate = datetime.date(year=2020, month=5, day=1)
             maxdate = today + datetime.timedelta(days=5)
                 # print(mindate, maxdate)
 
             cal = Calendar(top, font="Arial 14", selectmode='day', locale='en_US',
                             mindate=mindate, maxdate=maxdate, disabledforeground='red',
-                            cursor="hand1", year=2018, month=2, day=5)
+                            cursor="hand1", year=2020, month=5, day=5)
             cal.pack(fill="both", expand=True)
             incomebtn2 = Button(top, text="Select", command=print_sel).pack() 
             print("Date_new:"+str(date_selected))
@@ -189,7 +189,7 @@ def callincome(root):
         tv.heading(3,text="Description")
         tv.heading(4,text="Category")
         tv.heading(5,text="Account_type")
-        income.geometry('1000x100')
+        income.geometry('1000x500')
         income.title("Income Details")
         income.resizable(False,False)
         db = sqlite3.connect('myspendmate.db')

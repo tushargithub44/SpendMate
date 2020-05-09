@@ -5,10 +5,10 @@ from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 import sqlite3
-from balance import *
-from income import *
-from budget import *
-from expense import *
+from Main_Window.balance import *
+from Main_Window.income import *
+from Main_Window.budget import *
+from Main_Window.expense import *
 
 def callmenuFunc(menubar, root): 
 
