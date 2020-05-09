@@ -31,7 +31,7 @@ tlabel.config(font=("ubuntu", 25))
 
 menubar = Menu(root)  
 # Function menu
-callmenuFunc(menubar)
+callmenuFunc(menubar, root)
 # Others menu
 callmenuOther(menubar)
 root.config(menu=menubar)  

@@ -10,6 +10,12 @@ def makedatabase():
     cursor.execute("CREATE TABLE IF NOT EXISTS goals (name TEXT NOT NULL , enddate TEXT NOT NULL, target_value INT NOT NULL, current_value INT NOT NULL, description TEXT,day INT NOT NULL,month INT NOT NULL,year INT NOT NULL)")
     cursor.execute("CREATE TABLE IF NOT EXISTS budget (amount INT NOT NULL, percentage INT NOT NULL)")
     # ----------------------------------------------------------------------------------
+    cursor.execute("CREATE TABLE IF NOT EXISTS Currency (Symbol TEXT NOT NULL)")
+    cursor.execute("SELECT * FROM Currency")
+    status1 = cursor.fetchone()
+    if(status1==None):
+        cursor.execute("insert into Currency values('%s')"%('₹'))
+    # ----------------------------------------------------------------------------------
     cursor.execute("CREATE TABLE IF NOT EXISTS incomeCat (category TEXT NOT NULL UNIQUE)")
     cursor.execute("SELECT * FROM incomeCat")
     status1 = cursor.fetchone()[0]

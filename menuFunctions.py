@@ -5,9 +5,12 @@ from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 import sqlite3
+from balance import *
+from income import *
+from budget import *
+from expense import *
 
-
-def callmenuFunc(menubar): 
+def callmenuFunc(menubar, root): 
 
     def showCategories():
         categ = Tk()
@@ -174,16 +177,33 @@ def callmenuFunc(menubar):
         label_1.place(x=80,y=200)
 
         country_list = ["INR", "USD", "CAD", "CNY", "DKK", "EUR"] 
-
+        Symbol = ["₹", "$", "$", "¥", "kr", "€"]
         
         cb = ttk.Combobox(Currency,values=country_list,width=10)
         cb.place(x = 260,y= 200)
         cb.current(0)
 
         def SaveCurrency():
-            print(cb.get()) #  Save this to database
+            getCountry = cb.get()
+            index = country_list.index(str(getCountry))
+            # print("country: " + str(cb.get()))
+            # print("index : " + str(index))
+            # print("Symbol: " + str(Symbol[index]))
+            db = sqlite3.connect('myspendmate.db')
+            cursor = db.cursor()
+            cursor.execute("select * from Currency")
+            PreviousCurr = str(cursor.fetchone()[0])
+            Latest = (Symbol[index])
+            cursor.execute("update Currency set Symbol=? where Symbol=?" , (Latest, PreviousCurr))
+            cursor.close()
+            db.commit()
+            db.close()
             Currency.destroy()
-            messagebox.showinfo("Message","Operation Successful!")  
+            messagebox.showinfo("Message","Operation Successful!")
+            callbalance(root)
+            callincome(root)
+            callExpense(root)
+            callBudget(root)
 
         savebutton = Button(Currency, text = 'Save and Exit',command = SaveCurrency, padx=20, pady=20) 
         savebutton.place(x = 180, y = 320)
