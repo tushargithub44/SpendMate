@@ -281,7 +281,7 @@ def callGoals(root):
     # btn1 = Button(labelframe1, text = 'Manage Goals', command = ManageGoals) 
     # btn1.grid()
     seegoalbtn = Button(labelframe1, text = 'See Your Goals', command = SeeGoals) 
-    seegoalbtn.grid()
+    seegoalbtn.grid(row = 2, column = 0,padx=2)
 
     addgoalbtn = Button(labelframe1, text = 'Add a Goal', command = SetGoals) 
-    addgoalbtn.grid()
+    addgoalbtn.grid(row = 2, column = 1,padx=2)
