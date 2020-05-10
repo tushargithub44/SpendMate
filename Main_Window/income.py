@@ -4,9 +4,12 @@ from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
+from PIL import Image, ImageTk
+import PIL.Image
 import sqlite3
 from Main_Window.balance import *
 from Main_Window.Currency import *
+from ttkthemes import ThemedTk
 
 db = sqlite3.connect('myspendmate.db')
 cursor = db.cursor()
@@ -22,15 +25,13 @@ db.commit()
 db.close()
 date_selected=None
 
-
-
 def callincome(root):
-    labelframe2 = ttk.LabelFrame(root, text="Income Comments")  
+    labelframe2 = ttk.LabelFrame(root, text="Income Section")  
     labelframe2.grid(row=1,column = 3, columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30)
 
     CurrencyCurrent = CurrentCurrr()
-    rootlabel = ttk.Label(labelframe2, text="Total Income : " )  
+    rootlabel = ttk.Label(labelframe2, text="Total Income : ")  
     rootlabel.grid(row=1, column = 0)
     rootlabel.configure(anchor="center")
     rootlabel1 = ttk.Label(labelframe2, text= str(sum1) + CurrencyCurrent)  
@@ -39,11 +40,11 @@ def callincome(root):
     rootlabel1.configure(anchor="center")
 
     def AddIncome():
-        income = Tk()
-        income.geometry('500x500')
+        income = ThemedTk(theme = "xpnative", themebg = True)
         income.title("Add Income")
-    
-        label_1 = Label(income, text="Enter Amount",width=20,font=("bold", 10))
+        income.geometry('500x500')
+        print("Inside Button add income-------------------------")
+        label_1 = ttk.Label(income, text="Enter Amount",width=20,font=("bold", 10))
         label_1.place(x=60,y=60)
 
         entry_1 = Entry(income, bd=5)
@@ -54,7 +55,7 @@ def callincome(root):
             return s
             
         
-        label_2 = Label(income, text="Select Date",width=20,font=("bold", 10))
+        label_2 = ttk.Label(income, text="Select Date",width=20,font=("bold", 10))
         label_2.place(x=60,y=120)
         def dateSelector():
                 
@@ -65,9 +66,9 @@ def callincome(root):
                 print(dateselected)
                 date = str(dateselected)
                 print(date[6])
-                labelstatus = Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
-                label_3 = Label(income, text=dateselected,width=20,font=("bold", 10))
-                label_3.place(x=310,y=120)
+                labelstatus = ttk.Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
+                label_3 = ttk.Label(income, text=dateselected,width=20,font=("bold", 10))
+                label_3.place(x=380,y=120)
                 # cal.see(datetime.date(year=2016, month=2, day=5))
                 date = str(cal.selection_get())
                     
@@ -86,17 +87,17 @@ def callincome(root):
                             mindate=mindate, maxdate=maxdate, disabledforeground='red',
                             cursor="hand1", year=2020, month=5, day=5)
             cal.pack(fill="both", expand=True)
-            incomebtn2 = Button(top, text="Select", command=print_sel).pack() 
+            incomebtn2 = ttk.Button(top, text="Select", command=print_sel).pack() 
             print("Date_new:"+str(date_selected))
             return date_selected
                 # tk.top.destroy()
 
 
 
-        incomebtn = Button(income, text='Enter Date', command = dateSelector)
+        incomebtn = ttk.Button(income, text='Enter Date', command = dateSelector)
         incomebtn.place(x=240,y=120)
 
-        label_1 = Label(income, text="Description",width=20,font=("bold", 10))
+        label_1 = ttk.Label(income, text="Description",width=20,font=("bold", 10))
         label_1.place(x=60,y=180)
 
         entry_2 = Entry(income,bd = 5)
@@ -107,7 +108,7 @@ def callincome(root):
             print('Description: ' + s2)
             return s2
 
-        label_1 = Label(income, text="Category",width=20,font=("bold", 10))
+        label_1 = ttk.Label(income, text="Category",width=20,font=("bold", 10))
         label_1.place(x=60,y=240)
 
         def printcategory():
@@ -127,7 +128,7 @@ def callincome(root):
         cb.place(x = 240,y= 240)
         cb.current(0)
 
-        label_1 = Label(income, text="Account",width=20,font=("bold", 10))
+        label_1 = ttk.Label(income, text="Account",width=20,font=("bold", 10))
         label_1.place(x=60,y=300)
         
         def printaccount():
@@ -187,7 +188,7 @@ def callincome(root):
             incomeexit()
             pass 
 
-        savebutton = Button(income, text = 'Save and Exit',command = AllinOne, padx=20, pady=20) 
+        savebutton = ttk.Button(income, text = 'Save and Exit',command = AllinOne) 
         savebutton.place(x = 180, y = 350)
 
 
@@ -195,8 +196,8 @@ def callincome(root):
 
 
     def GetData():
-        income = Tk()
-        frm = Frame(income)
+        income = ThemedTk(theme = "xpnative", themebg = True)
+        frm = ttk.Frame(income)
         frm.pack(side=tk.LEFT,padx=20)
         
         tv=ttk.Treeview(frm,columns=(1,2,3,4,5) ,show="headings", height ='30')
@@ -228,6 +229,8 @@ def callincome(root):
       
 
     btn1 = ttk.Button(labelframe2, text = 'Add Income',command = AddIncome) 
-    btn1.grid(row = 2, column = 0,padx=2)
-    btn2 = ttk.Button(labelframe2, text = 'Get Details',command = GetData) 
-    btn2.grid(row = 2, column = 1, padx=2)
+    btn1.grid(row = 2, column = 1, pady=4)
+    # btn1.configure(anchor="center")
+    btn2 = ttk.Button(labelframe2, text = 'Income Details',command = GetData) 
+    btn2.grid(row = 3, column = 1, pady=4)
+    # btn2.configure(anchor="center")

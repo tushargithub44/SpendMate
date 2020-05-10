@@ -3,6 +3,9 @@ import tkinter as tk
 from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
+from ttkthemes import ThemedTk
+from PIL import Image, ImageTk
+import PIL.Image
 import matplotlib.pyplot as plt
 import sqlite3
 from Main_Window.Currency import *
@@ -23,7 +26,7 @@ db.close()
 date_selected=None
 
 def callExpense(root):
-    labelframe1 = ttk.LabelFrame(root, text="Expense Comments")  
+    labelframe1 = ttk.LabelFrame(root, text="Expense Section")  
     labelframe1.grid(row=1,column = 6, columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30) 
 
@@ -37,11 +40,11 @@ def callExpense(root):
 
     
     def AddExpense():
-        expense = Tk()
+        expense = ThemedTk(theme = "xpnative", themebg = True)
         expense.geometry('500x500')
         expense.title("Add Expense")
 
-        label_1 = Label(expense, text="Enter Amount",width=20,font=("bold", 10))
+        label_1 = ttk.Label(expense, text="Enter Amount",width=20,font=("bold", 10))
         label_1.place(x=60,y=60)
 
         entry_1 = Entry(expense, bd=5)
@@ -51,7 +54,7 @@ def callExpense(root):
             print('Amount: ' + s)
             return s
         
-        label_2 = Label(expense, text="Select Date",width=20,font=("bold", 10))
+        label_2 = ttk.Label(expense, text="Select Date",width=20,font=("bold", 10))
         label_2.place(x=60,y=120)
         def dateSelector():
                 def print_sel():
@@ -59,8 +62,8 @@ def callExpense(root):
                     dateselected = cal.selection_get()
                     date_selected=dateselected
                     print(dateselected)
-                    labelstatus = Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
-                    label_3 = Label(expense, text=dateselected,width=20,font=("bold", 10))
+                    labelstatus = ttk.Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
+                    label_3 = ttk.Label(expense, text=dateselected,width=20,font=("bold", 10))
                     label_3.place(x=310,y=120)
                     # cal.see(datetime.date(year=2020, month=2, day=5))
                     return dateselected
@@ -78,17 +81,17 @@ def callExpense(root):
                             mindate=mindate, maxdate=maxdate, disabledforeground='red',
                             cursor="hand1", year=2020, month=5, day=5)
                 cal.pack(fill="both", expand=True)
-                expensebtn2 = Button(top, text="Select", command=print_sel).pack() 
+                expensebtn2 = ttk.Button(top, text="Select", command=print_sel).pack() 
                 print("Date_new:"+str(date_selected))
                 return date_selected
                 # tk.top.destroy()
 
 
 
-        expensebtn = Button(expense, text='Enter Date', command = dateSelector)
+        expensebtn = ttk.Button(expense, text='Enter Date', command = dateSelector)
         expensebtn.place(x=240,y=120)
 
-        label_1 = Label(expense, text="Description",width=20,font=("bold", 10))
+        label_1 = ttk.Label(expense, text="Description",width=20,font=("bold", 10))
         label_1.place(x=60,y=180)
 
         entry_2 = Entry(expense,bd = 5)
@@ -98,7 +101,7 @@ def callExpense(root):
             print('Description: ' + s2)
             return s2
 
-        label_1 = Label(expense, text="Category",width=20,font=("bold", 10))
+        label_1 = ttk.Label(expense, text="Category",width=20,font=("bold", 10))
         label_1.place(x=60,y=240)
 
         def printcategory():
@@ -118,7 +121,7 @@ def callExpense(root):
         cb.place(x = 240,y= 240)
         cb.current(0)
 
-        label_1 = Label(expense, text="Account",width=20,font=("bold", 10))
+        label_1 = ttk.Label(expense, text="Account",width=20,font=("bold", 10))
         label_1.place(x=60,y=300)
 
         def printaccount():
@@ -179,13 +182,13 @@ def callExpense(root):
             expenseexit()
             pass 
 
-        savebutton = Button(expense, text = 'Save and Exit',command = AllinOne, padx=20, pady=20) 
+        savebutton = ttk.Button(expense, text = 'Save and Exit',command = AllinOne) 
         savebutton.place(x = 180, y = 350)
      
 
     def GetData():
         expense1 = Tk()
-        frm = Frame(expense1)
+        frm = ttk.Frame(expense1)
         frm.pack(side=tk.LEFT,padx=20)
         
         tv=ttk.Treeview(frm,columns=(1,2,3,4,5) ,show="headings", height ='30')
@@ -216,6 +219,6 @@ def callExpense(root):
                 
     #------------------------------------------------------------------ 
     btn1 = ttk.Button(labelframe1, text = 'Add Expense', command = AddExpense) 
-    btn1.grid(row = 2, column = 0,padx=2)
+    btn1.grid(row = 2, column = 1,padx=2, pady=4)
     btn2 = ttk.Button(labelframe1, text = 'Expense Details', command = GetData) 
-    btn2.grid(row = 2, column = 1,padx=2)
+    btn2.grid(row = 3, column = 1,padx=2, pady=4)

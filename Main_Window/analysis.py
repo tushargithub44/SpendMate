@@ -1,7 +1,9 @@
 from tkinter import *  
 from tkinter import ttk
+import tkinter as tk
 from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
+from ttkthemes import ThemedTk
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,12 +12,12 @@ import sqlite3
 
 
 def callAnalysis(root):
-    labelframe1 = ttk.LabelFrame(root, text="Positive Comments")  
+    labelframe1 = ttk.LabelFrame(root, text="Analysis Section")  
     labelframe1.grid(row=3,column = 3, columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30)  
     
-    rootlabel = ttk.Label(labelframe1, text="Place to put the positive comments")  
-    rootlabel.grid()  
+    rootlabel = ttk.Label(labelframe1, text="Analysis Plots of your Income and Expense")  
+    rootlabel.grid(row =3, column = 1, pady =2)  
 
     def displaypie():
         # Data to plot
@@ -77,7 +79,7 @@ def callAnalysis(root):
         plt.show()
 
     btn1 = ttk.Button(labelframe1, text = 'Categorywise Expense Analysis', command = displaypie) 
-    btn1.grid()
+    btn1.grid(row = 4,column = 1, pady = 2)
 
     def displaypie2():
         # Data to plot
@@ -139,25 +141,30 @@ def callAnalysis(root):
         plt.show()
 
     btn1 = ttk.Button(labelframe1, text = 'Categorywise Income Analysis', command = displaypie2) 
-    btn1.grid()
+    btn1.grid(row = 5,column = 1, pady = 2)
 
     def barexpense():
-        bar = Tk()
-        label_1 = Label(bar, text="Enter Month (Between 1-12)",width=20,font=("bold", 10))
-        label_1.grid()
+        bar = ThemedTk(theme = "xpnative", themebg = True)
+        bar.geometry('300x140')
+        label_1 = ttk.Label(bar, text="Enter Month (Between 1-12)",width=20,font=("bold", 10))
+        label_1.configure(anchor="center") 
+        label_1.pack(expand=1, fill=tk.X)
+
 
         entry_1 = Entry(bar, bd=5)
-        entry_1.grid()
+        entry_1.pack()
         def printmonth():
             s = entry_1.get()
             print('Month: ' + s)
             return s
         
-        label_2 = Label(bar, text="Enter Year",width=20,font=("bold", 10))
-        label_2.grid()
+        label_2 = ttk.Label(bar, text="Enter Year",width=20,font=("bold", 10))
+        label_2.configure(anchor="center") 
+        label_2.pack(expand=1, fill=tk.X)
+
 
         entry_2 = Entry(bar, bd=5)
-        entry_2.grid()
+        entry_2.pack()
         def printyear():
             s = entry_2.get()
             print('Year: ' + s)
@@ -198,29 +205,32 @@ def callAnalysis(root):
             yeargot = int(printyear())
             bar.destroy()
             draw(monthgot,yeargot)
-        sbutton = Button(bar, text = 'Continue',command = AllinOne, padx=20, pady=20) 
-        sbutton.grid()
+        sbutton = ttk.Button(bar, text = 'Continue',command = AllinOne) 
+        sbutton.pack()
         
     btn1 = ttk.Button(labelframe1, text = 'Day Wise Expense Analysis', command = barexpense) 
-    btn1.grid()
+    btn1.grid(row = 6,column = 1, pady = 2)
 
     def barincome():
-        bar = Tk()
-        label_1 = Label(bar, text="Enter Month (Between 1-12)",width=20,font=("bold", 10))
-        label_1.grid()
+        bar = ThemedTk(theme = "xpnative", themebg = True)
+        bar.geometry('300x140')
+        label_1 = ttk.Label(bar, text="Enter Month (Between 1-12)",width=20,font=("bold", 10))
+        label_1.configure(anchor="center") 
+        label_1.pack(expand=1, fill=tk.X)
 
         entry_1 = Entry(bar, bd=5)
-        entry_1.grid()
+        entry_1.pack()
         def printmonth():
             s = entry_1.get()
             print('Month: ' + s)
             return s
         
-        label_2 = Label(bar, text="Enter Year",width=20,font=("bold", 10))
-        label_2.grid()
+        label_2 = ttk.Label(bar, text="Enter Year",width=20,font=("bold", 10))
+        label_2.configure(anchor="center") 
+        label_2.pack(expand=1, fill=tk.X)
 
         entry_2 = Entry(bar, bd=5)
-        entry_2.grid()
+        entry_2.pack()
         def printyear():
             s = entry_2.get()
             print('Year: ' + s)
@@ -259,8 +269,8 @@ def callAnalysis(root):
             yeargot = int(printyear())
             bar.destroy()
             draw(monthgot,yeargot)
-        sbutton = Button(bar, text = 'Continue',command = AllinOne, padx=20, pady=20) 
-        sbutton.grid()
+        sbutton = ttk.Button(bar, text = 'Continue',command = AllinOne) 
+        sbutton.pack()
 
     btn1 = ttk.Button(labelframe1, text = 'Day Wise Income Analysis', command = barincome) 
-    btn1.grid()
+    btn1.grid(row = 7,column = 1, pady = 2)

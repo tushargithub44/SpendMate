@@ -1,4 +1,5 @@
 from tkinter import * 
+import tkinter as tk
 from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
 from ttkthemes import ThemedTk
@@ -23,7 +24,9 @@ from Menubar.menuOthers import *
 
 
 root = ThemedTk(theme = "xpnative", themebg = True)
-root.geometry("900x600")  
+root.geometry("950x600")  
+root.title("SpendMate - Your Money Manager")
+root.iconphoto(True, tk.PhotoImage(file='SpendMate1.png'))
 root.resizable(False, False)
 img = ImageTk.PhotoImage(PIL.Image.open("SpendMate1.png"))
 panel = tk.Label(root, image = img)

@@ -3,12 +3,14 @@ from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
+from PIL import Image, ImageTk
+import PIL.Image
 import sqlite3
 from Main_Window.Currency import *
 
 
 def callbalance(root):
-    labelframe1 = ttk.LabelFrame(root, text="Balance Comments")  
+    labelframe1 = ttk.LabelFrame(root, text="Balance Section")  
     labelframe1.grid(row=1,column = 0,columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30)  
     

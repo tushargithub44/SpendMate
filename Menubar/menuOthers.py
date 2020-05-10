@@ -2,8 +2,11 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 from tkcalendar import Calendar, DateEntry
+from ttkthemes import ThemedTk
 from tkinter import messagebox
 import matplotlib.pyplot as plt
+from PIL import Image, ImageTk
+import PIL.Image
 from tkhtmlview import HTMLLabel
 import webbrowser
 
@@ -14,22 +17,22 @@ def callback(url):
 
 def callmenuOther(menubar):
     def AboutUs():
-        AboutUs = Tk()
+        AboutUs = ThemedTk(theme = "xpnative", themebg = True)
         AboutUs.geometry('330x150')
         AboutUs.title('About Us')
-        rootlabel = Label(AboutUs, text="We are CSE Undergrads and Enthusiast Developers.",font=("bold", 10))
+        rootlabel = ttk.Label(AboutUs, text="We are CSE Undergrads and Enthusiast Developers.",font=("bold", 10))
         rootlabel.configure(anchor="center") 
         rootlabel.grid()
-        rootlabel = Label(AboutUs, text="This Application is made by : \n -- Akshat Gandhi \n -- Rugved Bongale \n -- Tushar Bapecha \n\n", width=30,font=("bold", 10))
+        rootlabel = ttk.Label(AboutUs, text="This Application is made by : \n -- Akshat Gandhi \n -- Rugved Bongale \n -- Tushar Bapecha \n\n", width=30,font=("bold", 10))
         rootlabel.configure(anchor="center") 
         rootlabel.grid()
 
     def FeedBack():
         print("Feedback here")
-        FeedBack = Tk()
+        FeedBack = ThemedTk(theme = "xpnative", themebg = True)
         FeedBack.title("Feedback")
         FeedBack.geometry('300x150')
-        FeedBackLabel = Label(FeedBack, text="We are always open to feedback :)",width=30,font=("bold", 10))
+        FeedBackLabel = ttk.Label(FeedBack, text="We are always open to feedback :)",width=30,font=("bold", 10))
         FeedBackLabel.configure(anchor="center")  
         FeedBackLabel.place(x = 30, y = 20)
         link1 = Label(FeedBack, text="Click here to give feedback",width=30,font=("bold", 10), fg="blue", cursor="hand2")
@@ -39,10 +42,10 @@ def callmenuOther(menubar):
 
     def UserM():
         print("User Manual here")
-        FeedBack = Tk()
+        FeedBack = ThemedTk(theme = "xpnative", themebg = True)
         FeedBack.title("Help")
         FeedBack.geometry('300x150')
-        FeedBackLabel = Label(FeedBack, text="To get help in using this \n Application refer the following UserManual",width=30,font=("bold", 10))
+        FeedBackLabel = ttk.Label(FeedBack, text="To get help in using this Application \nrefer the following UserManual",width=30,font=("bold", 10))
         FeedBackLabel.configure(anchor="center")  
         FeedBackLabel.place(x = 30, y = 20,)
         link1 = Label(FeedBack, text="Click here",width=30,font=("bold", 10), fg="blue", cursor="hand2")

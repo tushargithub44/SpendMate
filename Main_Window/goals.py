@@ -4,6 +4,9 @@ from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
 import matplotlib.pyplot as plt
+from ttkthemes import ThemedTk
+from PIL import Image, ImageTk
+import PIL.Image
 import sqlite3
 from Main_Window.balance import *
 
@@ -38,7 +41,7 @@ def callGoals(root):
         # label_1.place(x=170,y=20)
     
     def SeeGoals():
-        seegoals = Tk()
+        seegoals = ThemedTk(theme = "xpnative", themebg = True)
 
         def Modifyit():
             selected_item = tv.selection()[0] ## get selected item
@@ -48,11 +51,11 @@ def callGoals(root):
             qas = tv.item(curItem)
             name = qas['values'][0]
             newwin = Tk()
-            label_1 = Label(newwin, text="Goal Name : ",width=20,font=("bold", 10))
+            label_1 = ttk.Label(newwin, text="Goal Name : ",width=20,font=("bold", 10))
             label_1.grid(column = 0, row = 0)
-            label_1 = Label(newwin, text=str(name),width=20,font=("bold", 10))
+            label_1 = ttk.Label(newwin, text=str(name),width=20,font=("bold", 10))
             label_1.grid(column = 1, row = 0)
-            label_1 = Label(newwin, text="New Current value",width=20,font=("bold", 10))
+            label_1 = ttk.Label(newwin, text="New Current Value : ",width=20,font=("bold", 10))
             label_1.grid(column = 0, row = 1)
             entry_1 = Entry(newwin, bd=5)
             entry_1.grid(column = 1, row = 1)   
@@ -67,7 +70,7 @@ def callGoals(root):
                 db.commit()
                 db.close()
                 newwin.destroy()
-            changebtn = Button(newwin, text="Save Changes",command = change)
+            changebtn = ttk.Button(newwin, text="Save Changes",command = change)
             # changebtn.grid(column = 1, row = 3)
             changebtn.grid(row=2, columnspan = 2)
             print(qas['values'][0])
@@ -98,13 +101,14 @@ def callGoals(root):
             curItem = tv.focus()
             # print(tv.item(curItem))
 
-        button_del = Button(seegoals, text="Delete entry", command=deleteit)
+        button_del = ttk.Button(seegoals, text="Delete entry", command=deleteit)
         button_del.pack()
-        button_del = Button(seegoals, text="Modify Current Value for a Goal", command=Modifyit)
+        button_del = ttk.Button(seegoals, text="Modify Current Value for a Goal", command=Modifyit)
         button_del.pack()
-        label_1 = Label(seegoals, text="**Note: Make sure to select a goal before any operation",width=20,font='Helvetica 10 bold')
+        label_1 = ttk.Label(seegoals, text="**Note: Make sure to select a goal before any operation",width=20,font='Helvetica 10 bold')
         label_1.pack(expand=1, fill=tk.X)
-        gframe = Frame(seegoals)
+        label_1.config(anchor="center")
+        gframe = ttk.Frame(seegoals)
         gframe.pack(padx=20)
         tv=ttk.Treeview(gframe,columns=(1,2,3,4,5) ,show="headings", height ='30')
         tv.pack()
@@ -142,11 +146,11 @@ def callGoals(root):
 
 
     def SetGoals():
-        ingoal = Tk()
+        ingoal = ThemedTk(theme = "xpnative", themebg = True)
         ingoal.geometry('500x500')
         ingoal.title("Add Income")
 
-        label_1 = Label(ingoal, text="Goal Name",width=20,font=("bold", 10))
+        label_1 = ttk.Label(ingoal, text="Goal Name",width=20,font=("bold", 10))
         label_1.place(x=60,y=60)
 
         entry_1 = Entry(ingoal, bd=5)
@@ -156,7 +160,7 @@ def callGoals(root):
             print('Goal Name: ' + s)
             return s
         
-        label_2 = Label(ingoal, text="Select End Date",width=20,font=("bold", 10))
+        label_2 = ttk.Label(ingoal, text="Select End Date",width=20,font=("bold", 10))
         label_2.place(x=60,y=120)
 
         def dateSelector():
@@ -165,8 +169,8 @@ def callGoals(root):
                     dateselected = cal.selection_get()
                     date_selected = dateselected
                     print(dateselected)
-                    labelstatus = Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
-                    label_3 = Label(ingoal, text=dateselected,width=20,font=("bold", 10))
+                    labelstatus = ttk.Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
+                    label_3 = ttk.Label(ingoal, text=dateselected,width=20,font=("bold", 10))
                     label_3.place(x=330,y=120)
                     # cal.see(datetime.date(year=2020, month=5, day=7))
                     return dateselected
@@ -184,16 +188,16 @@ def callGoals(root):
                             mindate=mindate, maxdate=maxdate, disabledforeground='red',
                             cursor="hand1", year=2020, month=5, day=5)
                 cal.pack(fill="both", expand=True)
-                incomebtn2 = Button(top, text="Select", command=print_sel).pack() 
+                incomebtn2 = ttk.Button(top, text="Select", command=print_sel).pack() 
                 
                 # tk.top.destroy()
 
 
 
-        incomebtn = Button(ingoal, text='Enter End Date', command = dateSelector)
+        incomebtn = ttk.Button(ingoal, text='Enter End Date', command = dateSelector)
         incomebtn.place(x=240,y=120)
 
-        label_1 = Label(ingoal, text="Goal Target Value",width=20,font=("bold", 10))
+        label_1 = ttk.Label(ingoal, text="Goal Target Value",width=20,font=("bold", 10))
         label_1.place(x=60,y=180)
 
         entry_2 = Entry(ingoal,bd = 5)
@@ -203,7 +207,7 @@ def callGoals(root):
             print('Goal Value: ' + s2)
             return s2
 
-        label_1 = Label(ingoal, text="Current Value",width=20,font=("bold", 10))
+        label_1 = ttk.Label(ingoal, text="Current Value",width=20,font=("bold", 10))
         label_1.place(x=60,y=240)
 
         entry_3 = Entry(ingoal,bd = 5)
@@ -213,7 +217,7 @@ def callGoals(root):
             print('Initial Value: ' + s3)
             return s3
 
-        label_1 = Label(ingoal, text="Description",width=20,font=("bold", 10))
+        label_1 = ttk.Label(ingoal, text="Description",width=20,font=("bold", 10))
         label_1.place(x=60,y=300)
 
         entry_4 = Entry(ingoal,bd = 5)
@@ -265,7 +269,7 @@ def callGoals(root):
             incomeexit()
             pass 
 
-        savebutton = Button(ingoal, text = 'Save and Exit',command = AllinOne, padx=20, pady=20) 
+        savebutton = ttk.Button(ingoal, text = 'Save and Exit',command = AllinOne) 
         savebutton.place(x = 180, y = 350)
 
 
@@ -284,7 +288,7 @@ def callGoals(root):
     # btn1 = Button(labelframe1, text = 'Manage Goals', command = ManageGoals) 
     # btn1.grid()
     seegoalbtn = ttk.Button(labelframe1, text = 'See Your Goals', command = SeeGoals) 
-    seegoalbtn.grid(row = 4, column = 0,padx=2)
+    seegoalbtn.grid(row = 4, column = 1,pady=4)
 
     addgoalbtn = ttk.Button(labelframe1, text = 'Add a Goal', command = SetGoals) 
-    addgoalbtn.grid(row = 4, column = 1,padx=2)
+    addgoalbtn.grid(row = 5, column = 1,pady=4)
