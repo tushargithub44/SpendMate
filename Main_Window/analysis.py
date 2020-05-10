@@ -10,11 +10,11 @@ import sqlite3
 
 
 def callAnalysis(root):
-    labelframe1 = LabelFrame(root, text="Positive Comments")  
+    labelframe1 = ttk.LabelFrame(root, text="Positive Comments")  
     labelframe1.grid(row=3,column = 3, columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30)  
     
-    rootlabel = Label(labelframe1, text="Place to put the positive comments")  
+    rootlabel = ttk.Label(labelframe1, text="Place to put the positive comments")  
     rootlabel.grid()  
 
     def displaypie():
@@ -76,7 +76,7 @@ def callAnalysis(root):
 
         plt.show()
 
-    btn1 = Button(labelframe1, text = 'Categorywise Expense Analysis', command = displaypie) 
+    btn1 = ttk.Button(labelframe1, text = 'Categorywise Expense Analysis', command = displaypie) 
     btn1.grid()
 
     def displaypie2():
@@ -138,7 +138,7 @@ def callAnalysis(root):
 
         plt.show()
 
-    btn1 = Button(labelframe1, text = 'Categorywise Income Analysis', command = displaypie2) 
+    btn1 = ttk.Button(labelframe1, text = 'Categorywise Income Analysis', command = displaypie2) 
     btn1.grid()
 
     def barexpense():
@@ -201,7 +201,7 @@ def callAnalysis(root):
         sbutton = Button(bar, text = 'Continue',command = AllinOne, padx=20, pady=20) 
         sbutton.grid()
         
-    btn1 = Button(labelframe1, text = 'Day Wise Expense Analysis', command = barexpense) 
+    btn1 = ttk.Button(labelframe1, text = 'Day Wise Expense Analysis', command = barexpense) 
     btn1.grid()
 
     def barincome():
@@ -262,5 +262,5 @@ def callAnalysis(root):
         sbutton = Button(bar, text = 'Continue',command = AllinOne, padx=20, pady=20) 
         sbutton.grid()
 
-    btn1 = Button(labelframe1, text = 'Day Wise Income Analysis', command = barincome) 
+    btn1 = ttk.Button(labelframe1, text = 'Day Wise Income Analysis', command = barincome) 
     btn1.grid()

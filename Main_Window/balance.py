@@ -8,7 +8,7 @@ from Main_Window.Currency import *
 
 
 def callbalance(root):
-    labelframe1 = LabelFrame(root, text="Balance Comments")  
+    labelframe1 = ttk.LabelFrame(root, text="Balance Comments")  
     labelframe1.grid(row=1,column = 0,columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30)  
     
@@ -38,10 +38,10 @@ def callbalance(root):
     db.commit()
     db.close()
 
-    rootlabel = Label(labelframe1, text="Your Current Balance is : ")
+    rootlabel = ttk.Label(labelframe1, text="Your Current Balance is : ")
     # rootlabel.config(font=("Courier", 16))  
     rootlabel.grid(row = 1, column = 0, pady = 10)  
     print("current" + CurrencyCurrent)
-    rootlabel1 = Label(labelframe1, text=str(balance) + str(CurrencyCurrent))
+    rootlabel1 = ttk.Label(labelframe1, text=str(balance) + str(CurrencyCurrent))
     rootlabel1.config(font=("Courier", 13))  
     rootlabel1.grid(row = 1, column = 1, pady = 10)  

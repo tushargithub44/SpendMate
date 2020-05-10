@@ -10,7 +10,7 @@ from Main_Window.balance import *
 date_selected=None
 
 def callGoals(root):
-    labelframe1 = LabelFrame(root, text="Manage your Goals here")  
+    labelframe1 = ttk.LabelFrame(root, text="Manage your Goals here")  
     labelframe1.grid(row=3,column = 6, columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30)  
     
@@ -20,9 +20,9 @@ def callGoals(root):
     countgoals = cursor.fetchone()[0]
     if(countgoals=='None'):
         countgoals=str(0)
-    rootlabel = Label(labelframe1, text="Total Goals : ") 
+    rootlabel = ttk.Label(labelframe1, text="Total Goals : ") 
     rootlabel.grid(row=3,column = 0)
-    rootlabel1 = Label(labelframe1, text=str(countgoals)) 
+    rootlabel1 = ttk.Label(labelframe1, text=str(countgoals)) 
     rootlabel1.grid(row=3,column = 1)
     rootlabel1.config(font=("Courier", 13))  
     cursor.close()
@@ -283,8 +283,8 @@ def callGoals(root):
 
     # btn1 = Button(labelframe1, text = 'Manage Goals', command = ManageGoals) 
     # btn1.grid()
-    seegoalbtn = Button(labelframe1, text = 'See Your Goals', command = SeeGoals) 
+    seegoalbtn = ttk.Button(labelframe1, text = 'See Your Goals', command = SeeGoals) 
     seegoalbtn.grid(row = 4, column = 0,padx=2)
 
-    addgoalbtn = Button(labelframe1, text = 'Add a Goal', command = SetGoals) 
+    addgoalbtn = ttk.Button(labelframe1, text = 'Add a Goal', command = SetGoals) 
     addgoalbtn.grid(row = 4, column = 1,padx=2)

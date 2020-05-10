@@ -25,16 +25,18 @@ date_selected=None
 
 
 def callincome(root):
-    labelframe2 = LabelFrame(root, text="Income Comments")  
+    labelframe2 = ttk.LabelFrame(root, text="Income Comments")  
     labelframe2.grid(row=1,column = 3, columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30)
 
     CurrencyCurrent = CurrentCurrr()
-    rootlabel = Label(labelframe2, text="Total Income : " )  
+    rootlabel = ttk.Label(labelframe2, text="Total Income : " )  
     rootlabel.grid(row=1, column = 0)
-    rootlabel1 = Label(labelframe2, text= str(sum1) + CurrencyCurrent)  
+    rootlabel.configure(anchor="center")
+    rootlabel1 = ttk.Label(labelframe2, text= str(sum1) + CurrencyCurrent)  
     rootlabel1.config(font=("Courier", 13))  
     rootlabel1.grid(row=1, column = 1)
+    rootlabel1.configure(anchor="center")
 
     def AddIncome():
         income = Tk()
@@ -112,8 +114,15 @@ def callincome(root):
             print('Category: ' + cb.get())
             return cb.get()
 
-        
-        Category=["Salary","Year Bonus","FDR"]
+        db = sqlite3.connect('myspendmate.db')
+        cursor = db.cursor()
+        cursor.execute("select * from incomeCat")
+        cat_list=cursor.fetchall()
+        print("-------------incomeCat--------------")
+        print(cat_list)
+        Category = []
+        for i in cat_list:
+            Category.append(i[0])
         cb = ttk.Combobox(income,values=Category,width=10)
         cb.place(x = 240,y= 240)
         cb.current(0)
@@ -124,7 +133,15 @@ def callincome(root):
         def printaccount():
             print('Account: ' + accountbox.get())
             return accountbox.get()
-        Account=["Cash","Card","Paytm"]
+        db = sqlite3.connect('myspendmate.db')
+        cursor = db.cursor()
+        cursor.execute("select * from Account")
+        acc_list=cursor.fetchall()
+        # print("-------------incomeCat--------------")
+        # print(cat_list)
+        Account = []
+        for i in acc_list:
+            Account.append(i[0])
         accountbox = ttk.Combobox(income,values=Account,width=10)
         accountbox.place(x = 240,y= 300)
         accountbox.current(0)
@@ -210,7 +227,7 @@ def callincome(root):
     # -------------------------Income Main window Section---------------------
       
 
-    btn1 = Button(labelframe2, text = 'Add Income',command = AddIncome) 
+    btn1 = ttk.Button(labelframe2, text = 'Add Income',command = AddIncome) 
     btn1.grid(row = 2, column = 0,padx=2)
-    btn2 = Button(labelframe2, text = 'Get Details',command = GetData) 
+    btn2 = ttk.Button(labelframe2, text = 'Get Details',command = GetData) 
     btn2.grid(row = 2, column = 1, padx=2)

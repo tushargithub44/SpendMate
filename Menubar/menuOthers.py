@@ -51,7 +51,7 @@ def callmenuOther(menubar):
         link1.bind("<Button-1>", lambda e: callback("http://www.google.com"))
 
 
-    othersmenu = Menu(menubar, tearoff = 0)
+    othersmenu = Menu(menubar, tearoff = 0, activeborderwidth = 3, bd = 3)
     othersmenu.add_command(label = "Feedback!", command = FeedBack)
     othersmenu.add_command(label = "About us", command = AboutUs)
     othersmenu.add_command(label = "Help", command = UserM)

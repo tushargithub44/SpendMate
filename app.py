@@ -1,6 +1,7 @@
 from tkinter import * 
 from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
+from ttkthemes import ThemedTk
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 from databasemaker import *
@@ -20,17 +21,17 @@ from Menubar.menuOthers import *
 
 
 
-root = Tk()  
+
+root = ThemedTk(theme = "xpnative", themebg = True)
 root.geometry("900x600")  
 root.resizable(False, False)
-
 img = ImageTk.PhotoImage(PIL.Image.open("SpendMate1.png"))
 panel = tk.Label(root, image = img)
 panel.grid(row = 0,column = 0, columnspan=4)
 
-tlabel = Label(root, text="Welcome to SpendMate")  
+tlabel = ttk.Label(root, text="Welcome to SpendMate :)") 
 tlabel.grid(row = 0,column = 1, columnspan = 8,pady = 2)  
-tlabel.config(font=("ubuntu", 25))
+tlabel.config(font=("Comic Sans MS", 25))
 
 menubar = Menu(root)  
 # Function menu

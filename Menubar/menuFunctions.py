@@ -170,17 +170,17 @@ def callmenuFunc(menubar, root):
     def setCurrency():
         print("Set Currency here!")
         Currency = Tk()
-        Currency.geometry('500x500')
+        Currency.geometry('200x100')
         Currency.title("Set Currency")
 
         label_1 = Label(Currency, text="Select Currency",width=20,font=("bold", 10))
-        label_1.place(x=80,y=200)
+        label_1.grid()
 
         country_list = ["INR", "USD", "CAD", "CNY", "DKK", "EUR"] 
         Symbol = ["₹", "$", "$", "¥", "kr", "€"]
         
         cb = ttk.Combobox(Currency,values=country_list,width=10)
-        cb.place(x = 260,y= 200)
+        cb.grid()
         cb.current(0)
 
         def SaveCurrency():
@@ -289,7 +289,7 @@ def callmenuFunc(menubar, root):
         print("Take Reports here!")
 
 # ============================= Menu-Configs ========================================================
-    functionmenu = Menu(menubar, tearoff = 0)
+    functionmenu = Menu(menubar, tearoff = 0, activeborderwidth = 3, bd = 3)
     functionmenu.add_command(label = "Categories",command = showCategories)
     functionmenu.add_command(label = "Set Currency",command = setCurrency)
     functionmenu.add_command(label = "Accounts", command = AccountSetup)

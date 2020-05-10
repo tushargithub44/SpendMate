@@ -23,15 +23,15 @@ db.close()
 date_selected=None
 
 def callExpense(root):
-    labelframe1 = LabelFrame(root, text="Expense Comments")  
+    labelframe1 = ttk.LabelFrame(root, text="Expense Comments")  
     labelframe1.grid(row=1,column = 6, columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30) 
 
-    rootlabel = Label(labelframe1, text="Total Expense : ")  
+    rootlabel = ttk.Label(labelframe1, text="Total Expense : ")  
     rootlabel.grid()  
     CurrencyCurrent = CurrentCurrr()
     rootlabel.grid(row=1, column = 0)
-    rootlabel1 = Label(labelframe1, text= str(sum1) + CurrencyCurrent)  
+    rootlabel1 = ttk.Label(labelframe1, text= str(sum1) + CurrencyCurrent)  
     rootlabel1.config(font=("Courier", 13))  
     rootlabel1.grid(row=1, column = 1)
 
@@ -105,7 +105,15 @@ def callExpense(root):
             print('Category: ' + cb.get())
             return cb.get()
 
-        Category=["Salary","Year Bonus","FDR"]
+        db = sqlite3.connect('myspendmate.db')
+        cursor = db.cursor()
+        cursor.execute("select * from expenseCat")
+        cat_list=cursor.fetchall()
+        print("-------------incomeCat--------------")
+        print(cat_list)
+        Category = []
+        for i in cat_list:
+            Category.append(i[0])
         cb = ttk.Combobox(expense,values=Category,width=10)
         cb.place(x = 240,y= 240)
         cb.current(0)
@@ -117,7 +125,15 @@ def callExpense(root):
             print('Account: ' + accountbox.get())
             return accountbox.get()
 
-        Account=["Cash","Card","Paytm"]
+        db = sqlite3.connect('myspendmate.db')
+        cursor = db.cursor()
+        cursor.execute("select * from Account")
+        acc_list=cursor.fetchall()
+        # print("-------------incomeCat--------------")
+        # print(cat_list)
+        Account = []
+        for i in acc_list:
+            Account.append(i[0])
         accountbox = ttk.Combobox(expense,values=Account,width=10)
         accountbox.place(x = 240,y= 300)
         accountbox.current(0)
@@ -199,7 +215,7 @@ def callExpense(root):
 
                 
     #------------------------------------------------------------------ 
-    btn1 = Button(labelframe1, text = 'Add Expense', command = AddExpense) 
+    btn1 = ttk.Button(labelframe1, text = 'Add Expense', command = AddExpense) 
     btn1.grid(row = 2, column = 0,padx=2)
-    btn2 = Button(labelframe1, text = 'Expense Details', command = GetData) 
+    btn2 = ttk.Button(labelframe1, text = 'Expense Details', command = GetData) 
     btn2.grid(row = 2, column = 1,padx=2)

@@ -15,7 +15,7 @@ po=0
 
 def callBudget(root):
     CurrencyCurrent = CurrentCurrr()
-    budgetframe1 = LabelFrame(root, text="Budget Information")  
+    budgetframe1 = ttk.LabelFrame(root, text="Budget Information")  
     budgetframe1.grid(row=3,column = 0, columnspan=2, sticky='WE', \
                 padx=20, pady=20, ipadx=30, ipady=30)
     db = sqlite3.connect('myspendmate.db')
@@ -52,29 +52,29 @@ def callBudget(root):
 
     if check == 1:
         CurrencyCurrent = CurrentCurrr()
-        budgetlabel = Label(budgetframe1, text="Total Budget :")  
+        budgetlabel = ttk.Label(budgetframe1, text="Total Budget :")  
         budgetlabel.grid(row = 3, column = 0)  
-        budgetlabel1 = Label(budgetframe1, text=str(tp) + CurrencyCurrent)  
+        budgetlabel1 = ttk.Label(budgetframe1, text=str(tp) + CurrencyCurrent)  
         budgetlabel1.grid(row = 3, column = 1)  
         budgetlabel1.config(font=("Courier", 13))  
-        Spentlabel = Label(budgetframe1, text="Percentage Set :")  
+        Spentlabel = ttk.Label(budgetframe1, text="Percentage Set :")  
         Spentlabel.grid(row = 4, column = 0)  
-        Spentlabel1 = Label(budgetframe1, text=str(tp1) + "%")  
+        Spentlabel1 = ttk.Label(budgetframe1, text=str(tp1) + "%")  
         Spentlabel1.grid(row = 4, column = 1)
         Spentlabel1.config(font=("Courier", 13))  
         if pe>tp1:
-            budgetlabel2 = Label(budgetframe1, text="Current amount spend exceeds the budget",bg="red")  
+            budgetlabel2 = ttk.Label(budgetframe1, text="Current amount spend exceeds the budget",bg="red")  
             budgetlabel2.grid()
         else:
-            budgetlabel2 = Label(budgetframe1, text="Budget under control")  
+            budgetlabel2 = ttk.Label(budgetframe1, text="Budget under control")  
             budgetlabel2.grid()
 
     else:
-        budgetlabel = Label(budgetframe1, text=" Total Budget : Not Set")  
+        budgetlabel = ttk.Label(budgetframe1, text=" Total Budget : Not Set")  
         budgetlabel.grid()  
-        Spentlabel = Label(budgetframe1, text="")  
+        Spentlabel = ttk.Label(budgetframe1, text="")  
         Spentlabel.grid()
-        budgetlabel2 = Label(budgetframe1, text="")  
+        budgetlabel2 = ttk.Label(budgetframe1, text="")  
         budgetlabel2.grid()  
     budgetamt=0
 
@@ -159,5 +159,5 @@ def callBudget(root):
         btn1.place(x = 150, y = 180)
         
 
-    btn1 = Button(budgetframe1, text = 'Manage Budget', command=ManageBudget) 
+    btn1 = ttk.Button(budgetframe1, text = 'Manage Budget', command=ManageBudget) 
     btn1.grid()
