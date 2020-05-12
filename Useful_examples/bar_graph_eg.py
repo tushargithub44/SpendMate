@@ -1,6 +1,4 @@
-import matplotlib.pyplot as plt; plt.rcdefaults()
-import numpy as np
-import matplotlib.pyplot as plt
+
 
 objects = ('Python', 'C++', 'Java', 'Perl', 'Scala', 'Lisp','sfvcdf','ff','afdafda','fafa','afaf', 'fafda')
 y_pos = np.arange(len(objects))
@@ -10,6 +8,5 @@ plt.xticks(y_pos, objects)
 plt.ylabel('Usage')
 plt.xlabel('Date')
 plt.title('Programming language usage')
-
-plt.figure(figsize=(20,10))
 plt.show()
+# plt.figure(figsize=(20,10))

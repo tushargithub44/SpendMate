@@ -9,7 +9,7 @@ from databasemaker import *
 from PIL import Image, ImageTk
 import PIL.Image
 # Database Maker:
-makedatabase()  
+makedatabase()
 
 from Main_Window.balance import *
 from Main_Window.income import *

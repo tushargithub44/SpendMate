@@ -73,7 +73,7 @@ def callExpense(root):
                 import datetime
                 today = datetime.date.today()
 
-                mindate = datetime.date(year=2020, month=1, day=1)
+                mindate = datetime.date(year=2000, month=1, day=1)
                 maxdate = today + datetime.timedelta(days=5)
                 # print(mindate, maxdate)
 

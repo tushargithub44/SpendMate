@@ -75,7 +75,6 @@ def callAnalysis(root):
         ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
         shadow=True, startangle=90)
         ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-
         plt.show()
 
     btn1 = ttk.Button(labelframe1, text = 'Categorywise Expense Analysis', command = displaypie) 
@@ -143,28 +142,37 @@ def callAnalysis(root):
     btn1 = ttk.Button(labelframe1, text = 'Categorywise Income Analysis', command = displaypie2) 
     btn1.grid(row = 5,column = 1, pady = 2)
 
+# =========================================================================================
+
     def barexpense():
         bar = ThemedTk(theme = "xpnative", themebg = True)
-        bar.geometry('300x140')
-        label_1 = ttk.Label(bar, text="Enter Month (Between 1-12)",width=20,font=("bold", 10))
+
+        bar.title('Set Month and Year')
+        labelframe2 = ttk.LabelFrame(bar, text="Set Month and Year")  
+        labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
+                padx=30, pady=30, ipadx=30, ipady=30)
+
+        rootlabel = ttk.Label(labelframe2, text="Please Provide Following: ", width=30, font=("bold", 10))  
+        rootlabel.grid(row=2,column = 0,columnspan = 4,padx = 10, pady=4)
+
+        label_1 = ttk.Label(labelframe2, text="Enter Month(Between 1-12): ",width=30,font=("bold", 10))
         label_1.configure(anchor="center") 
-        label_1.pack(expand=1, fill=tk.X)
+        label_1.grid(row=3,column = 0,columnspan = 4, pady=4)
 
-
-        entry_1 = Entry(bar, bd=5)
-        entry_1.pack()
+        entry_1 = Entry(labelframe2, bd=5)
+        entry_1.grid(row=4,column = 0, pady=4)
         def printmonth():
             s = entry_1.get()
             print('Month: ' + s)
             return s
         
-        label_2 = ttk.Label(bar, text="Enter Year",width=20,font=("bold", 10))
+        label_2 = ttk.Label(labelframe2, text="Enter Year",width=30,font=("bold", 10))
         label_2.configure(anchor="center") 
-        label_2.pack(expand=1, fill=tk.X)
+        label_2.grid(row=5,column = 0, pady=4)
 
+        entry_2 = Entry(labelframe2, bd=5)
+        entry_2.grid(row=6,column = 0, pady=4)
 
-        entry_2 = Entry(bar, bd=5)
-        entry_2.pack()
         def printyear():
             s = entry_2.get()
             print('Year: ' + s)
@@ -205,32 +213,42 @@ def callAnalysis(root):
             yeargot = int(printyear())
             bar.destroy()
             draw(monthgot,yeargot)
-        sbutton = ttk.Button(bar, text = 'Continue',command = AllinOne) 
-        sbutton.pack()
+        sbutton = ttk.Button(labelframe2, text = 'Continue',command = AllinOne) 
+        sbutton.grid(row=7,column = 0, pady=4)
         
     btn1 = ttk.Button(labelframe1, text = 'Day Wise Expense Analysis', command = barexpense) 
     btn1.grid(row = 6,column = 1, pady = 2)
 
+# ===================================================================================================
+
     def barincome():
         bar = ThemedTk(theme = "xpnative", themebg = True)
-        bar.geometry('300x140')
-        label_1 = ttk.Label(bar, text="Enter Month (Between 1-12)",width=20,font=("bold", 10))
-        label_1.configure(anchor="center") 
-        label_1.pack(expand=1, fill=tk.X)
+        bar.title('Set Month and Year')
 
-        entry_1 = Entry(bar, bd=5)
-        entry_1.pack()
+        labelframe2 = ttk.LabelFrame(bar, text="Set Month and Year")  
+        labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
+                padx=30, pady=30, ipadx=30, ipady=30)
+
+        rootlabel = ttk.Label(labelframe2, text="Please Provide Following: ", width=30, font=("bold", 10))  
+        rootlabel.grid(row=2,column = 0,columnspan = 4,padx = 10, pady=4)
+
+        label_1 = ttk.Label(labelframe2, text="Enter Month(Between 1-12): ",width=30,font=("bold", 10))
+        label_1.configure(anchor="center") 
+        label_1.grid(row=3,column = 0,columnspan = 4, pady=4)
+
+        entry_1 = Entry(labelframe2, bd=5)
+        entry_1.grid(row=4,column = 0, pady=4)
         def printmonth():
             s = entry_1.get()
             print('Month: ' + s)
             return s
         
-        label_2 = ttk.Label(bar, text="Enter Year",width=20,font=("bold", 10))
+        label_2 = ttk.Label(labelframe2, text="Enter Year",width=30,font=("bold", 10))
         label_2.configure(anchor="center") 
-        label_2.pack(expand=1, fill=tk.X)
+        label_2.grid(row=5,column = 0, pady=4)
 
-        entry_2 = Entry(bar, bd=5)
-        entry_2.pack()
+        entry_2 = Entry(labelframe2, bd=5)
+        entry_2.grid(row=6,column = 0, pady=4)
         def printyear():
             s = entry_2.get()
             print('Year: ' + s)
@@ -269,8 +287,8 @@ def callAnalysis(root):
             yeargot = int(printyear())
             bar.destroy()
             draw(monthgot,yeargot)
-        sbutton = ttk.Button(bar, text = 'Continue',command = AllinOne) 
-        sbutton.pack()
+        sbutton = ttk.Button(labelframe2, text = 'Continue',command = AllinOne) 
+        sbutton.grid(row=7,column = 0, pady=4)
 
     btn1 = ttk.Button(labelframe1, text = 'Day Wise Income Analysis', command = barincome) 
     btn1.grid(row = 7,column = 1, pady = 2)

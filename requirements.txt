@@ -1,0 +1,6 @@
+pillow
+tkcalendar
+ttkthemes
+tkinter
+pdfrw
+fpdf
