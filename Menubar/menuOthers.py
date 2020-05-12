@@ -38,7 +38,7 @@ def callmenuOther(menubar):
         link1 = Label(FeedBack, text="Click here to give feedback",width=30,font=("bold", 10), fg="blue", cursor="hand2")
         link1.configure(anchor="center")
         link1.place(x = 30, y = 50)
-        link1.bind("<Button-1>", lambda e: callback("http://www.google.com"))
+        link1.bind("<Button-1>", lambda e: callback("https://docs.google.com/forms/d/e/1FAIpQLSd4UH2BXl-jRCnLFsDGS0OVK6u5liSXEED30cRuv4_bZJBB_Q/viewform?usp=sf_link"))
 
     def UserM():
         print("User Manual here")
