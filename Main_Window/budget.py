@@ -88,25 +88,43 @@ def callBudget(root):
 
     def ManageBudget():
         income = ThemedTk(theme = "xpnative", themebg = True)
-        income.geometry('400x250')
         income.title("Manage Budget")
 
-        label_1 = ttk.Label(income, text="Set Budget Value",width=20,font=("bold", 10))
-        label_1.place(x=30,y=60)
+        labelframe2 = ttk.LabelFrame(income, text="Set Month and Year")  
+        labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
+                padx=30, pady=30, ipadx=30, ipady=30)
 
-        entry_1 = Entry(income, bd=5)
-        entry_1.place(x=240,y=60)
+        rootlabel = ttk.Label(labelframe2, text="Please provide the following: ", width=30, font=("bold", 10))  
+        rootlabel.grid(row=2,column = 0,columnspan = 4,padx = 10, pady=4)
+
+        label_1 = ttk.Label(labelframe2, text="Set Budget Value ",width=30,font=("bold", 10))
+        label_1.grid(row=3,column = 0,columnspan = 4, pady=4)
+
+        entry_1 = Entry(labelframe2, bd=5)
+        entry_1.grid(row=4,column = 0, pady=4)
+
+
+        # label_1 = ttk.Label(income, text="Set Budget Value",width=20,font=("bold", 10))
+        # label_1.place(x=30,y=60)
+
+        # entry_1 = Entry(income, bd=5)
+        # entry_1.place(x=240,y=60)
         def printamount():
             s = entry_1.get()
             print('Budget: ' + s)
             return s
 
+        label_2 = ttk.Label(labelframe2, text="Set Percentage to Notify:",width=30,font=("bold", 10))
+        label_2.grid(row=5, column = 0, columnspan = 4, pady=4)
 
-        label_2 = ttk.Label(income, text="Set Percentage to Notify:",width=30,font=("bold", 10))
-        label_2.place(x=30,y=120)
+        entry_2 = Entry(labelframe2, bd=5)
+        entry_2.grid(row=6, column = 0, pady=4)
 
-        entry_2 = Entry(income, bd=5)
-        entry_2.place(x=240,y=120)
+        # label_2 = ttk.Label(income, text="Set Percentage to Notify:",width=30,font=("bold", 10))
+        # label_2.place(x=30,y=120)
+
+        # entry_2 = Entry(income, bd=5)
+        # entry_2.place(x=240,y=120)
         def printper():
             s = int(entry_2.get())
             if s>100 or s<0:
@@ -172,8 +190,8 @@ def callBudget(root):
             income.destroy()
 
 
-        btn1 = ttk.Button(income, text = 'Set', command=put) 
-        btn1.place(x = 150, y = 180)
+        btn1 = ttk.Button(labelframe2, text = 'Set', command=put) 
+        btn1.grid(row=7,column = 0, pady=4)
         
 
     btn1 = ttk.Button(budgetframe1, text = 'Manage Budget', command=ManageBudget) 

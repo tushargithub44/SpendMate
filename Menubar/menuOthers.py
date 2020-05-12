@@ -18,39 +18,46 @@ def callback(url):
 def callmenuOther(menubar):
     def AboutUs():
         AboutUs = ThemedTk(theme = "xpnative", themebg = True)
-        AboutUs.geometry('330x150')
+        labelframe2 = ttk.LabelFrame(AboutUs, text="About us")  
+        labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
+                padx=30, pady=30, ipadx=30, ipady=30)
+
         AboutUs.title('About Us')
-        rootlabel = ttk.Label(AboutUs, text="We are CSE Undergrads and Enthusiast Developers.",font=("bold", 10))
+        rootlabel = ttk.Label(labelframe2, text="We are CSE Undergrads and Enthusiast Developers.",font=("bold", 10))
         rootlabel.configure(anchor="center") 
         rootlabel.grid()
-        rootlabel = ttk.Label(AboutUs, text="This Application is made by : \n -- Akshat Gandhi \n -- Rugved Bongale \n -- Tushar Bapecha \n\n", width=30,font=("bold", 10))
+        rootlabel = ttk.Label(labelframe2, text="This Application is made by : \n -- Akshat Gandhi \n -- Rugved Bongale \n -- Tushar Bapecha \n\n", width=30,font=("bold", 10))
         rootlabel.configure(anchor="center") 
         rootlabel.grid()
 
     def FeedBack():
         print("Feedback here")
         FeedBack = ThemedTk(theme = "xpnative", themebg = True)
+        labelframe2 = ttk.LabelFrame(FeedBack, text="About us")  
+        labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
+                padx=30, pady=30, ipadx=30, ipady=30)
         FeedBack.title("Feedback")
-        FeedBack.geometry('300x150')
-        FeedBackLabel = ttk.Label(FeedBack, text="We are always open to feedback :)",width=30,font=("bold", 10))
+        FeedBackLabel = ttk.Label(labelframe2, text="We are always open to feedback :)",width=30,font=("bold", 10))
         FeedBackLabel.configure(anchor="center")  
-        FeedBackLabel.place(x = 30, y = 20)
-        link1 = Label(FeedBack, text="Click here to give feedback",width=30,font=("bold", 10), fg="blue", cursor="hand2")
+        FeedBackLabel.grid()
+        link1 = Label(labelframe2, text="Click here to give feedback",width=30,font=("bold", 10), fg="blue", cursor="hand2")
         link1.configure(anchor="center")
-        link1.place(x = 30, y = 50)
+        link1.grid()
         link1.bind("<Button-1>", lambda e: callback("https://docs.google.com/forms/d/e/1FAIpQLSd4UH2BXl-jRCnLFsDGS0OVK6u5liSXEED30cRuv4_bZJBB_Q/viewform?usp=sf_link"))
 
     def UserM():
         print("User Manual here")
         FeedBack = ThemedTk(theme = "xpnative", themebg = True)
         FeedBack.title("Help")
-        FeedBack.geometry('300x150')
-        FeedBackLabel = ttk.Label(FeedBack, text="To get help in using this Application \nrefer the following UserManual",width=30,font=("bold", 10))
+        labelframe2 = ttk.LabelFrame(FeedBack, text="About us")  
+        labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
+                padx=30, pady=30, ipadx=30, ipady=30)
+        FeedBackLabel = ttk.Label(labelframe2, text="To get help in using this Application \nrefer the following UserManual",width=30,font=("bold", 10))
         FeedBackLabel.configure(anchor="center")  
-        FeedBackLabel.place(x = 30, y = 20,)
-        link1 = Label(FeedBack, text="Click here",width=30,font=("bold", 10), fg="blue", cursor="hand2")
+        FeedBackLabel.grid()
+        link1 = Label(labelframe2, text="Click here",width=30,font=("bold", 10), fg="blue", cursor="hand2")
         link1.configure(anchor="center")
-        link1.place(x = 30, y = 65)
+        link1.grid()
         link1.bind("<Button-1>", lambda e: callback("http://www.google.com"))
 
 

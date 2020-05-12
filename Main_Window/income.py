@@ -42,21 +42,36 @@ def callincome(root):
     def AddIncome():
         income = ThemedTk(theme = "xpnative", themebg = True)
         income.title("Add Income")
-        income.geometry('500x500')
         print("Inside Button add income-------------------------")
-        label_1 = ttk.Label(income, text="Enter Amount",width=20,font=("bold", 10))
-        label_1.place(x=60,y=60)
 
-        entry_1 = Entry(income, bd=5)
-        entry_1.place(x=240,y=60)
+        labelframe_2 = ttk.LabelFrame(income, text="Add Income Entry")  
+        labelframe_2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
+                padx=30, pady=30, ipadx=30, ipady=30)
+
+        rootlabel = ttk.Label(labelframe_2, text="Enter the following fields ", width=30, font=("bold", 10))  
+        rootlabel.grid(row=2,column = 0,columnspan = 4,padx = 10, pady=4)
+
+        label_1 = ttk.Label(labelframe_2, text="Enter Amount ",width=30,font=("bold", 10))
+        label_1.grid(row=3,column = 0,columnspan = 4, pady=4)
+
+        entry_1 = Entry(labelframe_2, bd=5)
+        entry_1.grid(row=3,column = 4, pady=4)
+
+        # label_1 = ttk.Label(income, text="Enter Amount",width=20,font=("bold", 10))
+        # label_1.place(x=60,y=60)
+
+        # entry_1 = Entry(income, bd=5)
+        # entry_1.place(x=240,y=60)
         def printamount():
             s = entry_1.get()
             print('Amount: ' + s)
             return s
             
+        label_2 = ttk.Label(labelframe_2, text="Select Date",width=30,font=("bold", 10))
+        label_2.grid(row=4,column = 0,columnspan = 4, pady=4)
         
-        label_2 = ttk.Label(income, text="Select Date",width=20,font=("bold", 10))
-        label_2.place(x=60,y=120)
+        # label_2 = ttk.Label(income, text="Select Date",width=20,font=("bold", 10))
+        # label_2.place(x=60,y=120)
         def dateSelector():
                 
             def print_sel():
@@ -67,8 +82,8 @@ def callincome(root):
                 date = str(dateselected)
                 print(date[6])
                 labelstatus = ttk.Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
-                label_3 = ttk.Label(income, text=dateselected,width=20,font=("bold", 10))
-                label_3.place(x=380,y=120)
+                label_3 = ttk.Label(labelframe_2, text=dateselected,width=30,font=("bold", 10))
+                label_3.grid(row=4,column = 6, pady=4)
                 # cal.see(datetime.date(year=2016, month=2, day=5))
                 date = str(cal.selection_get())
                     
@@ -94,22 +109,27 @@ def callincome(root):
 
 
 
-        incomebtn = ttk.Button(income, text='Enter Date', command = dateSelector)
-        incomebtn.place(x=240,y=120)
+        incomebtn = ttk.Button(labelframe_2, text='Enter Date', command = dateSelector)
+        incomebtn.grid(row=4,column = 4, pady=4)
 
-        label_1 = ttk.Label(income, text="Description",width=20,font=("bold", 10))
-        label_1.place(x=60,y=180)
+        label_1 = ttk.Label(labelframe_2, text="Description (Max Char = 32)",width=30,font=("bold", 10))
+        label_1.grid(row=5,column = 0,columnspan = 4, pady=4)
 
-        entry_2 = Entry(income,bd = 5)
-        entry_2.place(x=240,y=180)
+        entry_2 = Entry(labelframe_2, bd=5)
+        entry_2.grid(row=5,column = 4, pady=4)
+        # label_1 = ttk.Label(income, text="Description",width=20,font=("bold", 10))
+        # label_1.place(x=60,y=180)
+
+        # entry_2 = Entry(income,bd = 5)
+        # entry_2.place(x=240,y=180)
         def printdescription():
             s2 = entry_2.get()
             desc = str(entry_2.get())
             print('Description: ' + s2)
             return s2
 
-        label_1 = ttk.Label(income, text="Category",width=20,font=("bold", 10))
-        label_1.place(x=60,y=240)
+        label_1 = ttk.Label(labelframe_2, text="Category",width=30,font=("bold", 10))
+        label_1.grid(row=6,column=0,columnspan = 4, pady=4)
 
         def printcategory():
             print('Category: ' + cb.get())
@@ -124,12 +144,12 @@ def callincome(root):
         Category = []
         for i in cat_list:
             Category.append(i[0])
-        cb = ttk.Combobox(income,values=Category,width=10)
-        cb.place(x = 240,y= 240)
+        cb = ttk.Combobox(labelframe_2,values=Category,width=10)
+        cb.grid(row=6,column = 4, pady=4)
         cb.current(0)
 
-        label_1 = ttk.Label(income, text="Account",width=20,font=("bold", 10))
-        label_1.place(x=60,y=300)
+        label_1 = ttk.Label(labelframe_2, text="Account",width=30,font=("bold", 10))
+        label_1.grid(row=7,column = 0,columnspan = 4, pady=10)
         
         def printaccount():
             print('Account: ' + accountbox.get())
@@ -143,8 +163,8 @@ def callincome(root):
         Account = []
         for i in acc_list:
             Account.append(i[0])
-        accountbox = ttk.Combobox(income,values=Account,width=10)
-        accountbox.place(x = 240,y= 300)
+        accountbox = ttk.Combobox(labelframe_2,values=Account,width=10)
+        accountbox.grid(row=7,column = 4, pady=10)
         accountbox.current(0)
 
         def put():
@@ -188,10 +208,8 @@ def callincome(root):
             incomeexit()
             pass 
 
-        savebutton = ttk.Button(income, text = 'Save and Exit',command = AllinOne) 
-        savebutton.place(x = 180, y = 350)
-
-
+        savebutton = ttk.Button(labelframe_2, text = 'Save and Exit',command = AllinOne) 
+        savebutton.grid(row=8,column = 0,columnspan = 6, pady=4)
     
 
 

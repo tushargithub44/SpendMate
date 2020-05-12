@@ -147,21 +147,33 @@ def callGoals(root):
 
     def SetGoals():
         ingoal = ThemedTk(theme = "xpnative", themebg = True)
-        ingoal.geometry('500x500')
         ingoal.title("Add Income")
 
-        label_1 = ttk.Label(ingoal, text="Goal Name",width=20,font=("bold", 10))
-        label_1.place(x=60,y=60)
+        labelframe_2 = ttk.LabelFrame(ingoal, text="Add Goal ")  
+        labelframe_2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
+                padx=30, pady=30, ipadx=30, ipady=30)
 
-        entry_1 = Entry(ingoal, bd=5)
-        entry_1.place(x=240,y=60)
+        rootlabel = ttk.Label(labelframe_2, text="Enter the following fields ", width=30, font=("bold", 10))  
+        rootlabel.grid(row=2,column = 0,columnspan = 4,padx = 10, pady=4)
+
+        label_1 = ttk.Label(labelframe_2, text="Goal Name ",width=30,font=("bold", 10))
+        label_1.grid(row=3,column = 0,columnspan = 4, pady=4)
+
+        entry_1 = Entry(labelframe_2, bd=5)
+        entry_1.grid(row=3,column = 4, pady=4)
+
+        # label_1 = ttk.Label(ingoal, text="Goal Name",width=20,font=("bold", 10))
+        # label_1.place(x=60,y=60)
+
+        # entry_1 = Entry(ingoal, bd=5)
+        # entry_1.place(x=240,y=60)
         def printamount():
             s = entry_1.get()
             print('Goal Name: ' + s)
             return s
         
-        label_2 = ttk.Label(ingoal, text="Select End Date",width=20,font=("bold", 10))
-        label_2.place(x=60,y=120)
+        label_2 = ttk.Label(labelframe_2, text="Select Date",width=30,font=("bold", 10))
+        label_2.grid(row=4,column = 0,columnspan = 4, pady=4)
 
         def dateSelector():
                 def print_sel():
@@ -170,8 +182,8 @@ def callGoals(root):
                     date_selected = dateselected
                     print(dateselected)
                     labelstatus = ttk.Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
-                    label_3 = ttk.Label(ingoal, text=dateselected,width=20,font=("bold", 10))
-                    label_3.place(x=330,y=120)
+                    label_3 = ttk.Label(labelframe_2, text=dateselected,width=30,font=("bold", 10))
+                    label_3.grid(row=4,column = 6, pady=4)
                     # cal.see(datetime.date(year=2020, month=5, day=7))
                     return dateselected
 
@@ -180,7 +192,7 @@ def callGoals(root):
                 import datetime
                 today = datetime.date.today()
 
-                mindate = datetime.date(year=2020, month=5, day=1)
+                mindate = datetime.date(year=2000, month=5, day=1)
                 maxdate = today + datetime.timedelta(days=100)
                 # print(mindate, maxdate)
 
@@ -194,34 +206,40 @@ def callGoals(root):
 
 
 
-        incomebtn = ttk.Button(ingoal, text='Enter End Date', command = dateSelector)
-        incomebtn.place(x=240,y=120)
+        incomebtn = ttk.Button(labelframe_2, text='Enter Date', command = dateSelector)
+        incomebtn.grid(row=4,column = 4, pady=4)
 
-        label_1 = ttk.Label(ingoal, text="Goal Target Value",width=20,font=("bold", 10))
-        label_1.place(x=60,y=180)
+        # label_1 = ttk.Label(ingoal, text="Goal Target Value",width=20,font=("bold", 10))
+        # label_1.place(x=60,y=180)
 
-        entry_2 = Entry(ingoal,bd = 5)
-        entry_2.place(x=240,y=180)
+        label_1 = ttk.Label(labelframe_2, text="Goal Target Value (Max Char = 32)",width=30,font=("bold", 10))
+        label_1.grid(row=5,column = 0,columnspan = 4, pady=4)
+
+        entry_2 = Entry(labelframe_2, bd=5)
+        entry_2.grid(row=5,column = 4, pady=4)
         def printdescription():
             s2 = entry_2.get()
             print('Goal Value: ' + s2)
             return s2
 
-        label_1 = ttk.Label(ingoal, text="Current Value",width=20,font=("bold", 10))
-        label_1.place(x=60,y=240)
+        # label_1 = ttk.Label(ingoal, text="Current Value",width=20,font=("bold", 10))
+        # label_1.place(x=60,y=240)
 
-        entry_3 = Entry(ingoal,bd = 5)
-        entry_3.place(x=240,y=240)
+        label_1 = ttk.Label(labelframe_2, text="Current Value",width=30,font=("bold", 10))
+        label_1.grid(row=6,column=0,columnspan = 4, pady=4)
+
+        entry_3 = Entry(labelframe_2,bd = 5)
+        entry_3.grid(row=6,column = 4, pady=4)
         def printcategory():
             s3 = entry_3.get()
             print('Initial Value: ' + s3)
             return s3
 
-        label_1 = ttk.Label(ingoal, text="Description",width=20,font=("bold", 10))
-        label_1.place(x=60,y=300)
+        label_1 = ttk.Label(labelframe_2, text="Description",width=30,font=("bold", 10))
+        label_1.grid(row=7,column=0,columnspan = 4, pady=4)
 
-        entry_4 = Entry(ingoal,bd = 5)
-        entry_4.place(x=240,y=300)
+        entry_4 = Entry(labelframe_2,bd = 5)
+        entry_4.grid(row=7,column = 4, pady=4)
         def printaccount():
             s3 = entry_4.get()
             print('Description: ' + s3)
@@ -269,8 +287,8 @@ def callGoals(root):
             incomeexit()
             pass 
 
-        savebutton = ttk.Button(ingoal, text = 'Save and Exit',command = AllinOne) 
-        savebutton.place(x = 180, y = 350)
+        savebutton = ttk.Button(labelframe_2, text = 'Save and Exit',command = AllinOne) 
+        savebutton.grid(row=8, column = 0, columnspan = 6, pady=4)
 
 
         # seegoalbtn = Button(Goals, text = 'See Your Goals', command = SeeGoals) 
@@ -288,7 +306,7 @@ def callGoals(root):
     # btn1 = Button(labelframe1, text = 'Manage Goals', command = ManageGoals) 
     # btn1.grid()
     seegoalbtn = ttk.Button(labelframe1, text = 'See Your Goals', command = SeeGoals) 
-    seegoalbtn.grid(row = 4, column = 1,pady=4)
+    seegoalbtn.grid(row = 5, column = 1,pady=4)
 
     addgoalbtn = ttk.Button(labelframe1, text = 'Add a Goal', command = SetGoals) 
-    addgoalbtn.grid(row = 5, column = 1,pady=4)
+    addgoalbtn.grid(row = 4, column = 1,pady=4)
