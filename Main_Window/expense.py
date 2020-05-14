@@ -64,8 +64,15 @@ def callExpense(root):
 
         def printamount():
             s = entry_1.get()
-            print('Amount: ' + s)
-            return s
+            if s.isdigit():
+                print('Amount: ' + s)
+                return s
+            else:
+                messagebox.showinfo("Attention!","Amount Should be a number and not text or any Special Character!\nEntry Not Saved. Try Again!")
+                entry_1.delete(0, END)
+                entry_1.insert(0, "")
+                return "stop"
+
         
         label_2 = ttk.Label(labelframe_2, text="Select Date",width=30,font=("bold", 10))
         label_2.grid(row=4,column = 0,columnspan = 4, pady=4)
@@ -78,9 +85,10 @@ def callExpense(root):
                     dateselected = cal.selection_get()
                     date_selected=dateselected
                     print(dateselected)
-                    labelstatus = ttk.Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
+                    labelstatus = ttk.Label(top, text="****Close this window.",width=20,font=("bold", 12)).grid(column = 0)
                     label_3 = ttk.Label(labelframe_2, text=dateselected,width=30,font=("bold", 10))
                     label_3.grid(row=4,column = 6, pady=4)
+                    top.destroy()
                     # cal.see(datetime.date(year=2020, month=2, day=5))
                     return dateselected
 
@@ -96,8 +104,9 @@ def callExpense(root):
                 cal = Calendar(top, font="Arial 14", selectmode='day', locale='en_US',
                             mindate=mindate, maxdate=maxdate, disabledforeground='red',
                             cursor="hand1", year=2020, month=5, day=5)
-                cal.pack(fill="both", expand=True)
-                expensebtn2 = ttk.Button(top, text="Select", command=print_sel).pack() 
+                # cal.pack(fill="both", expand=True)
+                cal.grid()
+                expensebtn2 = ttk.Button(top, text="Select", command=print_sel).grid()
                 print("Date_new:"+str(date_selected))
                 return date_selected
                 # tk.top.destroy()
@@ -167,10 +176,15 @@ def callExpense(root):
 
         def put():
             t1 = printamount()
-            t2 = printdescription()
-            t3 = printcategory()
-            t4 = printaccount()
-            t5 = date_selected
+            if t1 == "stop":
+                return "stopped"
+            t2 = str(printdescription())
+            t3 = str(printcategory())
+            t4 = str(printaccount())
+            t5 = str(date_selected)
+            if date_selected == None:
+                messagebox.showinfo("Attention!","Date Field Should be not be empty.\nEntry Not Saved.\nPlease Select the Date and Try Again!")
+                return "stopped"
             print('date selected' + str(t5))
             info = str(t5)
             day = info[8]+info[9]
@@ -191,6 +205,7 @@ def callExpense(root):
             db.commit()
             db.close
             callbalance(root)
+            return "done"
             # callBudget(root)
         
 
@@ -200,7 +215,12 @@ def callExpense(root):
             expense.destroy()
 
         def AllinOne():
-            put()
+            # put()
+            status = put()
+            # if status == "stopped":
+            #     AllinOne()
+            if status == "done":
+                messagebox.showinfo("Success!!","Expense Entry have been saved")
             print("After Expense Update Budget----------")
             callBudget(root)
             expenseexit()

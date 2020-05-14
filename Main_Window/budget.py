@@ -111,8 +111,14 @@ def callBudget(root):
         # entry_1.place(x=240,y=60)
         def printamount():
             s = entry_1.get()
-            print('Budget: ' + s)
-            return s
+            if s.isdigit():
+                print('Budget: ' + s)
+                return s
+            else:
+                messagebox.showinfo("Attention!","Budget Value Should be a number and not text or any Special Character!\nEntry Not Saved. Try Again!")
+                entry_1.delete(0, END)
+                entry_1.insert(0, "")
+                return "stop"
 
         label_2 = ttk.Label(labelframe2, text="Set Percentage to Notify:",width=30,font=("bold", 10))
         label_2.grid(row=5, column = 0, columnspan = 4, pady=4)
@@ -135,21 +141,24 @@ def callBudget(root):
 
         def put():
             t1 =printamount()
-            t2 =printper()
-            if t2 == 1:
+            if t1 == "stop":
                 get()
             else:
-                u1 = int(t1)
-                u2 = int(t2)
-                db = sqlite3.connect('myspendmate.db')
-                cursor = db.cursor()
-                cursor.execute("insert into budget values('%d','%d')"%(int(t1),int(t2)))
-                
-                
-                cursor.close()
-                db.commit()
-                db.close
-                get()
+                t2 = printper()
+                if t2 == 1:
+                    get()
+                else:
+                    u1 = int(t1)
+                    u2 = int(t2)
+                    db = sqlite3.connect('myspendmate.db')
+                    cursor = db.cursor()
+                    cursor.execute("insert into budget values('%d','%d')"%(int(t1),int(t2)))
+                    
+                    
+                    cursor.close()
+                    db.commit()
+                    db.close
+                    get()
         
        
             
@@ -182,6 +191,7 @@ def callBudget(root):
                 budgetlabel2.grid(row = 5, column = 0, pady =2)
                 budgetlabel2 = ttk.Label(budgetframe1, text="!!!BUDGET EXCEEDED!!!")  
                 budgetlabel2.grid(row = 5, column = 1, pady =2)
+                # budgetlabel2.config(bg="Red")
             else:
                 budgetlabel2 = ttk.Label(budgetframe1, text="Message :")  
                 budgetlabel2.grid(row = 5, column = 0, pady =2)

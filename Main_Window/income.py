@@ -64,8 +64,18 @@ def callincome(root):
         # entry_1.place(x=240,y=60)
         def printamount():
             s = entry_1.get()
-            print('Amount: ' + s)
-            return s
+            print("s")
+            print(s)
+            print(type(s))
+            if s.isdigit():
+                print('Amount: ' + s)
+                return s
+            else:
+                messagebox.showinfo("Attention!","Amount Should be a number and not text or any Special Character!\nEntry Not Saved. Try Again!")
+                entry_1.delete(0, END)
+                entry_1.insert(0, "")
+                return "stop"
+
             
         label_2 = ttk.Label(labelframe_2, text="Select Date",width=30,font=("bold", 10))
         label_2.grid(row=4,column = 0,columnspan = 4, pady=4)
@@ -86,6 +96,7 @@ def callincome(root):
                 label_3.grid(row=4,column = 6, pady=4)
                 # cal.see(datetime.date(year=2016, month=2, day=5))
                 date = str(cal.selection_get())
+                top.destroy()
                     
                     
 
@@ -169,11 +180,16 @@ def callincome(root):
 
         def put():
             t1 = printamount()
-            t2 = printdescription()
-            t3 = printcategory()
-            t4 = printaccount()
-            t5 = date_selected
-            print('date selected' + str(t5))
+            if t1 == "stop":
+                return "stopped"
+            t2 = str(printdescription())
+            t3 = str(printcategory())
+            t4 = str(printaccount())
+            t5 = str(date_selected)
+            if date_selected == None:
+                messagebox.showinfo("Attention!","Date Field Should be not be empty.\nEntry Not Saved.\nPlease Select the Date and Try Again!")
+                return "stopped"
+            print('date selected :' + str(t5))
             info = str(t5)
             day = info[8]+info[9]
             mon = info[5]+info[6]
@@ -193,7 +209,7 @@ def callincome(root):
             db.commit()
             db.close
             callbalance(root)
-            
+            return "done"
             
         
         
@@ -204,7 +220,11 @@ def callincome(root):
             income.destroy()
 
         def AllinOne():
-            put()
+            status = put()
+            # if status == "stopped":
+            #     AllinOne()
+            if status == "done":
+                messagebox.showinfo("Success!!","Income Entry have been saved")
             incomeexit()
             pass 
 

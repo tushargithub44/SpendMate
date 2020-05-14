@@ -572,6 +572,7 @@ def callmenuFunc(menubar, root):
             pdf.image('barexpense.png', x = None, y = None, w = 0, h = 0, type = '', link = '')
             print('name---------------------------' + str(name))
             pdf.output('{}.pdf'.format(name), 'F')
+            messagebox.showinfo("Success!!","Your Report have been saved in Root Directory.\nCheck it out!!")
             Acexit()
 
         def Acexit():
@@ -579,7 +580,7 @@ def callmenuFunc(menubar, root):
 
         btn1 = ttk.Button(labelframe2, text = 'Get Report!',command = Add) 
         btn1.grid(row=8,column = 0, pady=4)
-        pass
+        # pass
 
 # ============================= Menu-Configs ========================================================
     functionmenu = Menu(menubar, tearoff = 0, activeborderwidth = 3, bd = 3)

@@ -39,8 +39,14 @@ def callAnalysis(root):
         entry_1.grid(row=4,column = 0, pady=4)
         def printmonth():
             s = entry_1.get()
-            print('Month: ' + s)
-            return s
+            if s.isdigit():
+                print('Month: ' + s)
+                return s           
+            else:
+                entry_1.delete(0, END)
+                entry_1.insert(0, "")
+                return "stop"
+
         
         label_2 = ttk.Label(labelframe2, text="Enter Year",width=30,font=("bold", 10))
         label_2.configure(anchor="center") 
@@ -51,8 +57,14 @@ def callAnalysis(root):
 
         def printyear():
             s = entry_2.get()
-            print('Year: ' + s)
-            return s
+            if s.isdigit():
+                print('Year: ' + s)
+                return s          
+            else:
+                entry_1.delete(0, END)
+                entry_1.insert(0, "")
+                return "stop"
+
         
         def draw(monthgot,yeargot):
             db = sqlite3.connect('myspendmate.db')
@@ -111,7 +123,10 @@ def callAnalysis(root):
             plt.show()
         def AllinOne():
             monthgot = printmonth()
-            yeargot = int(printyear())
+            yeargot = printyear()
+            if monthgot == "stop" or yeargot == "stop":
+                messagebox.showinfo("Attention!","Month/Year Should be a number and not text or any Special Character!\nEntry Not Saved. Try Again!")
+                return "stopped"
             dispie.destroy()
             draw(monthgot,yeargot)
         sbutton = ttk.Button(labelframe2, text = 'Continue',command = AllinOne) 
@@ -141,8 +156,13 @@ def callAnalysis(root):
         entry_1.grid(row=4,column = 0, pady=4)
         def printmonth():
             s = entry_1.get()
-            print('Month: ' + s)
-            return s
+            if s.isdigit():
+                print('Month: ' + s)
+                return s           
+            else:
+                entry_1.delete(0, END)
+                entry_1.insert(0, "")
+                return "stop"
         
         label_2 = ttk.Label(labelframe2, text="Enter Year",width=30,font=("bold", 10))
         label_2.configure(anchor="center") 
@@ -153,8 +173,13 @@ def callAnalysis(root):
 
         def printyear():
             s = entry_2.get()
-            print('Year: ' + s)
-            return s
+            if s.isdigit():
+                print('Year: ' + s)
+                return s          
+            else:
+                entry_1.delete(0, END)
+                entry_1.insert(0, "")
+                return "stop"
         
         def draw(monthgot,yeargot):
             db = sqlite3.connect('myspendmate.db')
@@ -214,7 +239,10 @@ def callAnalysis(root):
             plt.show()
         def AllinOne():
             monthgot = printmonth()
-            yeargot = int(printyear())
+            yeargot = printyear()
+            if monthgot == "stop" or yeargot == "stop":
+                messagebox.showinfo("Attention!","Month/Year Should be a number and not text or any Special Character!\nEntry Not Saved. Try Again!")
+                return "stopped"
             dispie2.destroy()
             draw(monthgot,yeargot)
         sbutton = ttk.Button(labelframe2, text = 'Continue',command = AllinOne) 
@@ -244,8 +272,13 @@ def callAnalysis(root):
         entry_1.grid(row=4,column = 0, pady=4)
         def printmonth():
             s = entry_1.get()
-            print('Month: ' + s)
-            return s
+            if s.isdigit():
+                print('Month: ' + s)
+                return s           
+            else:
+                entry_1.delete(0, END)
+                entry_1.insert(0, "")
+                return "stop"
         
         label_2 = ttk.Label(labelframe2, text="Enter Year",width=30,font=("bold", 10))
         label_2.configure(anchor="center") 
@@ -256,8 +289,13 @@ def callAnalysis(root):
 
         def printyear():
             s = entry_2.get()
-            print('Year: ' + s)
-            return s
+            if s.isdigit():
+                print('Year: ' + s)
+                return s          
+            else:
+                entry_1.delete(0, END)
+                entry_1.insert(0, "")
+                return "stop"
         
         def draw(monthgot,yeargot):
             dates = []
@@ -291,7 +329,10 @@ def callAnalysis(root):
 
         def AllinOne():
             monthgot = printmonth()
-            yeargot = int(printyear())
+            yeargot = printyear()
+            if monthgot == "stop" or yeargot == "stop":
+                messagebox.showinfo("Attention!","Month/Year Should be a number and not text or any Special Character!\nEntry Not Saved. Try Again!")
+                return "stopped"
             bar.destroy()
             draw(monthgot,yeargot)
         sbutton = ttk.Button(labelframe2, text = 'Continue',command = AllinOne) 
@@ -321,8 +362,13 @@ def callAnalysis(root):
 
         def printmonth():
             s = entry_1.get()
-            print('Month: ' + s)
-            return s
+            if s.isdigit():
+                print('Month: ' + s)
+                return s           
+            else:
+                entry_1.delete(0, END)
+                entry_1.insert(0, "")
+                return "stop"
         
         label_2 = ttk.Label(labelframe2, text="Enter Year",width=30,font=("bold", 10))
         label_2.configure(anchor="center") 
@@ -332,8 +378,13 @@ def callAnalysis(root):
         entry_2.grid(row=6,column = 0, pady=4)
         def printyear():
             s = entry_2.get()
-            print('Year: ' + s)
-            return s
+            if s.isdigit():
+                print('Year: ' + s)
+                return s          
+            else:
+                entry_1.delete(0, END)
+                entry_1.insert(0, "")
+                return "stop"
         
         def draw(monthgot,yeargot):
             dates = []
@@ -365,7 +416,10 @@ def callAnalysis(root):
 
         def AllinOne():
             monthgot = printmonth()
-            yeargot = int(printyear())
+            yeargot = printyear()
+            if monthgot == "stop" or yeargot == "stop":
+                messagebox.showinfo("Attention!","Month/Year Should be a number and not text or any Special Character!\nEntry Not Saved. Try Again!")
+                return "stopped"
             bar.destroy()
             draw(monthgot,yeargot)
         sbutton = ttk.Button(labelframe2, text = 'Continue',command = AllinOne) 

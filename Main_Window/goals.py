@@ -147,7 +147,7 @@ def callGoals(root):
 
     def SetGoals():
         ingoal = ThemedTk(theme = "xpnative", themebg = True)
-        ingoal.title("Add Income")
+        ingoal.title("Add Goal")
 
         labelframe_2 = ttk.LabelFrame(ingoal, text="Add Goal ")  
         labelframe_2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
@@ -185,6 +185,7 @@ def callGoals(root):
                     label_3 = ttk.Label(labelframe_2, text=dateselected,width=30,font=("bold", 10))
                     label_3.grid(row=4,column = 6, pady=4)
                     # cal.see(datetime.date(year=2020, month=5, day=7))
+                    top.destroy()
                     return dateselected
 
                 top = Toplevel(ingoal)
@@ -219,8 +220,14 @@ def callGoals(root):
         entry_2.grid(row=5,column = 4, pady=4)
         def printdescription():
             s2 = entry_2.get()
-            print('Goal Value: ' + s2)
-            return s2
+            if s2.isdigit():
+                print('Goal Value: ' + s2)
+                return s2
+            else:
+                entry_1.delete(0, END)
+                entry_1.insert(0, "")
+                return "stop"
+            
 
         # label_1 = ttk.Label(ingoal, text="Current Value",width=20,font=("bold", 10))
         # label_1.place(x=60,y=240)
@@ -232,8 +239,14 @@ def callGoals(root):
         entry_3.grid(row=6,column = 4, pady=4)
         def printcategory():
             s3 = entry_3.get()
-            print('Initial Value: ' + s3)
-            return s3
+            if s3.isdigit():
+                print('Initial Value: ' + s3)
+                return s3
+            else:
+                entry_1.delete(0, END)
+                entry_1.insert(0, "")
+                return "stop"
+
 
         label_1 = ttk.Label(labelframe_2, text="Description",width=30,font=("bold", 10))
         label_1.grid(row=7,column=0,columnspan = 4, pady=4)
@@ -247,11 +260,17 @@ def callGoals(root):
 
 
         def put():
-            t1 = printamount()
+            t1 = str(printamount())
             t2 = printdescription()
             t3 = printcategory()
-            t4 = printaccount()
-            t5 = date_selected
+            t4 = str(printaccount())
+            if t3 == "stop" or t4 == "stop":
+                messagebox.showinfo("Attention!","Value Should be a number and not text or any Special Character!\nEntry Not Saved. Try Again!")
+                return "stopped"
+            t5 = str(date_selected)
+            if date_selected == None:
+                messagebox.showinfo("Attention!","Date Field Should be not be empty.\nEntry Not Saved.\nPlease Select the Date and Try Again!")
+                return "stopped"
             print('date selected' + str(t5))
             info = str(t5)
             day = info[8]+info[9]
@@ -271,6 +290,7 @@ def callGoals(root):
             cursor.close()
             db.commit()
             db.close
+            return "done"
 
         # label_1 = Label(income, text="Payment Recieved?",width=20,font=("bold", 10))
         # label_1.place(x=60,y=360)
@@ -282,8 +302,12 @@ def callGoals(root):
             # printdescription()
             # printcategory()
             # printaccount()
-            put()
 
+            status = put()
+            if status == "done":
+                messagebox.showinfo("Success!!","Goal Entry have been saved")
+            # if status == "stopped":
+            #     AllinOne()
             incomeexit()
             pass 
 
