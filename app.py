@@ -7,10 +7,12 @@ from tkinter import messagebox
 import matplotlib.pyplot as plt
 from databasemaker import *
 from PIL import Image, ImageTk
+
 import PIL.Image
 # Database Maker:
 makedatabase()
 
+from Main_Window.theme import ttk_theme
 from Main_Window.balance import *
 from Main_Window.income import *
 from Main_Window.budget import *
@@ -23,8 +25,7 @@ from Menubar.menuOthers import *
 
 
 
-root = ThemedTk(theme = "xpnative", themebg = True)
-# root.geometry("950x600")  
+root = ThemedTk(theme = ttk_theme, themebg = True)
 root.title("SpendMate - Your Money Manager")
 root.iconphoto(True, tk.PhotoImage(file='SpendMate1.png'))
 root.resizable(False, False)

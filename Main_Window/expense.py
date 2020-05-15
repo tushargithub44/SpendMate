@@ -11,6 +11,7 @@ import sqlite3
 from Main_Window.Currency import *
 from Main_Window.balance import *
 from Main_Window.budget import *
+from Main_Window.theme import ttk_theme
 
 
 db = sqlite3.connect('myspendmate.db')
@@ -40,7 +41,7 @@ def callExpense(root):
 
     
     def AddExpense():
-        expense = ThemedTk(theme = "xpnative", themebg = True)
+        expense = ThemedTk(theme = ttk_theme, themebg = True)
         expense.title("Add Expense")
         expense.resizable(False, False)
         labelframe_2 = ttk.LabelFrame(expense, text="Add Expense Entry")  
@@ -152,7 +153,7 @@ def callExpense(root):
             Category.append(i[0])
         cb = ttk.Combobox(labelframe_2,values=Category,width=10)
         cb.grid(row=6,column = 4, pady=4)
-        # cb.current(0)
+        cb.current(0)
 
         label_1 = ttk.Label(labelframe_2, text="Account",width=30,font=("bold", 10))
         label_1.grid(row=7,column = 0,columnspan = 4, pady=10)
@@ -172,7 +173,7 @@ def callExpense(root):
             Account.append(i[0])
         accountbox = ttk.Combobox(labelframe_2,values=Account,width=10)
         accountbox.grid(row=7,column = 4, pady=10)
-        # accountbox.current(0)
+        accountbox.current(0)
 
         def put():
             t1 = printamount()

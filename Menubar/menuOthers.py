@@ -9,7 +9,7 @@ from PIL import Image, ImageTk
 import PIL.Image
 from tkhtmlview import HTMLLabel
 import webbrowser
-
+from Main_Window.theme import ttk_theme
 
 def callback(url):
     webbrowser.open_new(url)
@@ -17,7 +17,7 @@ def callback(url):
 
 def callmenuOther(menubar):
     def AboutUs():
-        AboutUs = ThemedTk(theme = "xpnative", themebg = True)
+        AboutUs = ThemedTk(theme = ttk_theme, themebg = True)
         labelframe2 = ttk.LabelFrame(AboutUs, text="About us")  
         labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
                 padx=30, pady=30, ipadx=30, ipady=30)
@@ -32,7 +32,7 @@ def callmenuOther(menubar):
 
     def FeedBack():
         print("Feedback here")
-        FeedBack = ThemedTk(theme = "xpnative", themebg = True)
+        FeedBack = ThemedTk(theme = ttk_theme, themebg = True)
         labelframe2 = ttk.LabelFrame(FeedBack, text="About us")  
         labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
                 padx=30, pady=30, ipadx=30, ipady=30)
@@ -47,7 +47,7 @@ def callmenuOther(menubar):
 
     def UserM():
         print("User Manual here")
-        FeedBack = ThemedTk(theme = "xpnative", themebg = True)
+        FeedBack = ThemedTk(theme = ttk_theme, themebg = True)
         FeedBack.title("Help")
         labelframe2 = ttk.LabelFrame(FeedBack, text="About us")  
         labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \

@@ -9,6 +9,7 @@ from PIL import Image, ImageTk
 import PIL.Image
 import sqlite3
 from Main_Window.balance import *
+from Main_Window.theme import ttk_theme
 
 date_selected=None
 
@@ -41,7 +42,7 @@ def callGoals(root):
         # label_1.place(x=170,y=20)
     
     def SeeGoals():
-        seegoals = ThemedTk(theme = "xpnative", themebg = True)
+        seegoals = ThemedTk(theme = ttk_theme, themebg = True)
 
         def Modifyit():
             selected_item = tv.selection()[0] ## get selected item
@@ -147,7 +148,7 @@ def callGoals(root):
 
 
     def SetGoals():
-        ingoal = ThemedTk(theme = "xpnative", themebg = True)
+        ingoal = ThemedTk(theme = ttk_theme, themebg = True)
         ingoal.title("Add Goal")
         ingoal.resizable(False, False)
         labelframe_2 = ttk.LabelFrame(ingoal, text="Add Goal ")  

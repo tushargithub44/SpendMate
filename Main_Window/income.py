@@ -9,6 +9,7 @@ import PIL.Image
 import sqlite3
 from Main_Window.balance import *
 from Main_Window.Currency import *
+from Main_Window.theme import ttk_theme
 from ttkthemes import ThemedTk
 
 db = sqlite3.connect('myspendmate.db')
@@ -40,7 +41,7 @@ def callincome(root):
     rootlabel1.configure(anchor="center")
 
     def AddIncome():
-        income = ThemedTk(theme = "xpnative", themebg = True)
+        income = ThemedTk(theme = ttk_theme, themebg = True)
         income.title("Add Income")
         print("Inside Button add income-------------------------")
         income.resizable(False, False)
@@ -158,7 +159,7 @@ def callincome(root):
             Category.append(i[0])
         cb = ttk.Combobox(labelframe_2,values=Category,width=10)
         cb.grid(row=6,column = 4, pady=4)
-        # cb.current(0)
+        cb.current(0)
 
         label_1 = ttk.Label(labelframe_2, text="Account",width=30,font=("bold", 10))
         label_1.grid(row=7,column = 0,columnspan = 4, pady=10)
@@ -177,7 +178,7 @@ def callincome(root):
             Account.append(i[0])
         accountbox = ttk.Combobox(labelframe_2,values=Account,width=10)
         accountbox.grid(row=7,column = 4, pady=10)
-        # accountbox.current(0)
+        accountbox.current(0)
 
         def put():
             t1 = printamount()
@@ -235,7 +236,7 @@ def callincome(root):
 
 
     def GetData():
-        income1 = ThemedTk(theme = "xpnative", themebg = True)
+        income1 = ThemedTk(theme = ttk_theme, themebg = True)
         frm = ttk.Frame(income1)
         frm.pack(side=tk.LEFT,padx=20)
         

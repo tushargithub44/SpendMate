@@ -9,6 +9,7 @@ from PIL import Image, ImageTk
 import PIL.Image
 import sqlite3
 from Main_Window.Currency import CurrentCurrr
+from Main_Window.theme import ttk_theme
 
 tp = 0
 tp1=0
@@ -68,9 +69,11 @@ def callBudget(root):
         Spentlabel1.grid(row = 4, column = 1)
         Spentlabel1.config(font=("Courier", 13))  
         if pe>tp1:
+            style = ttk.Style()
+            style.configure("BW.TLabel", background="yellow")
             budgetlabel2 = ttk.Label(budgetframe1, text="Message :")  
             budgetlabel2.grid(row = 5, column = 0, pady =2)
-            budgetlabel2 = ttk.Label(budgetframe1, text="!!!BUDGET EXCEEDED!!!")  
+            budgetlabel2 = ttk.Label(budgetframe1, text="!!!BUDGET EXCEEDED!!!", style="BW.TLabel")  
             budgetlabel2.grid(row = 5, column = 1, pady =2)
         else:
             budgetlabel2 = ttk.Label(budgetframe1, text="Message :")  
@@ -93,7 +96,7 @@ def callBudget(root):
     budgetamt=0
 
     def ManageBudget():
-        income = ThemedTk(theme = "xpnative", themebg = True)
+        income = ThemedTk(theme = ttk_theme, themebg = True)
         income.title("Manage Budget")
         income.resizable(False, False)
         labelframe2 = ttk.LabelFrame(income, text="Set Month and Year")  

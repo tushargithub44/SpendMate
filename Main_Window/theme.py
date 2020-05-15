@@ -1,0 +1,1 @@
+ttk_theme = "xpnative"

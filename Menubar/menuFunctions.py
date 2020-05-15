@@ -18,11 +18,12 @@ from Main_Window.balance import *
 from Main_Window.income import *
 from Main_Window.budget import *
 from Main_Window.expense import *
+from Main_Window.theme import ttk_theme
 
 def callmenuFunc(menubar, root): 
 
     def showCategories():
-        categ = ThemedTk(theme = "xpnative", themebg = True)
+        categ = ThemedTk(theme = ttk_theme, themebg = True)
         # categ.geometry('650x230')
         categ.resizable(False, False)
         categ.title("Categories")
@@ -38,7 +39,7 @@ def callmenuFunc(menubar, root):
 
 
         def AddCategories():
-            Ac = ThemedTk(theme = "xpnative", themebg = True)
+            Ac = ThemedTk(theme = ttk_theme, themebg = True)
             # Ac.geometry('250x150')
             Ac.resizable(False, False)
             Ac.title('Add Categories')
@@ -68,7 +69,7 @@ def callmenuFunc(menubar, root):
             
 
         def GetCategories():
-            GetC = ThemedTk(theme = "xpnative", themebg = True)
+            GetC = ThemedTk(theme = ttk_theme, themebg = True)
             frm = ttk.Frame(GetC)
             frm.pack(side=tk.LEFT,padx=20)
             
@@ -112,7 +113,7 @@ def callmenuFunc(menubar, root):
         rootlabel.grid()
 
         def Add():
-            Ac = ThemedTk(theme = "xpnative", themebg = True)
+            Ac = ThemedTk(theme = ttk_theme, themebg = True)
             # Ac.geometry('250x150')
             Ac.resizable(False, False)
             Ac.title('Add Categories')
@@ -141,7 +142,7 @@ def callmenuFunc(menubar, root):
             # Ac.destroy()
 
         def Get():
-            GetC = ThemedTk(theme = "xpnative", themebg = True)
+            GetC = ThemedTk(theme = ttk_theme, themebg = True)
             frm = ttk.Frame(GetC)
             frm.pack(side=tk.LEFT,padx=20)
             
@@ -183,7 +184,7 @@ def callmenuFunc(menubar, root):
     
     def setCurrency():
         print("Set Currency here!")
-        Currency = ThemedTk(theme = "xpnative", themebg = True)
+        Currency = ThemedTk(theme = ttk_theme, themebg = True)
         Currency.resizable(False, False)
         # Currency.geometry('250x100')
         Currency.title("Set Currency")
@@ -233,7 +234,7 @@ def callmenuFunc(menubar, root):
 # ============================= Account Setup ========================================================
     def AccountSetup():
         print("Account Setup")
-        accsetup = ThemedTk(theme = "xpnative", themebg = True)
+        accsetup = ThemedTk(theme = ttk_theme, themebg = True)
         accsetup.resizable(False, False)
         # accsetup.geometry('500x230')
         accsetup.title("Accounts")
@@ -273,7 +274,7 @@ def callmenuFunc(menubar, root):
             savebutton.pack(padx=20, pady=20)
 
         def Get():
-            GetC = ThemedTk(theme = "xpnative", themebg = True)
+            GetC = ThemedTk(theme = ttk_theme, themebg = True)
             frm = ttk.Frame(GetC)
             frm.pack(side=tk.LEFT,padx=20)
             
@@ -311,7 +312,7 @@ def callmenuFunc(menubar, root):
 
     def Reports():
         print("Account Setup")
-        accsetup = ThemedTk(theme = "xpnative", themebg = True)
+        accsetup = ThemedTk(theme = ttk_theme, themebg = True)
         # accsetup.geometry('500x230')
         accsetup.title("Reports")
 
@@ -343,7 +344,9 @@ def callmenuFunc(menubar, root):
 
         def Add(): 
             mon = entry_1.get()
+            monint = int(mon)
             yr = entry_2.get()
+            yrint = int(yr)
             name = entry_3.get()
             conn = sqlite3.connect("myspendmate.db")
             df = pd.read_sql_query("select * from income where month='%s' AND year='%s';"%(mon, yr), conn,)
@@ -358,13 +361,26 @@ def callmenuFunc(menubar, root):
 
             dates = []
             income_cost=[]
-            for i in range(30):
+            print('monint')
+            print(monint)
+            if monint == 2:
+                if (yrint % 4) == 0 and (yrint % 100) == 0 and (yrint % 400) == 0:
+                    days_num = 28
+                else:
+                    days_num = 29
+            elif monint == 1 or monint ==  3 or monint == 5 or monint == 7 or monint == 8 or monint == 10 or monint == 12: 
+                days_num = 31
+            elif monint == 4 or monint == 6 or monint == 9 or monint == 11:
+                days_num = 30
+                print('days are 30')
+            print(days_num)
+            for i in range(days_num):
                 dates.append(i+1)
             dates = tuple(dates)
 
             db = sqlite3.connect('myspendmate.db')
             cursor = db.cursor()
-            for i in range(30):
+            for i in range(days_num):
                 val = i+1
                 cursor.execute("select sum(amount) from income where day=? AND month=? AND year=?", (val,mon,yr))
                 total_income = cursor.fetchone()[0]
@@ -372,7 +388,7 @@ def callmenuFunc(menubar, root):
                     total_income = 0 
                 income_cost.append(total_income)
 
-            y_pos = np.arange(len(dates))
+            y_pos = np.arange(days_num)
             ax.barh(y_pos, income_cost, align='center', alpha =0.5)
             ax.set_yticks(y_pos)
             ax.set_yticklabels(dates)
@@ -496,33 +512,46 @@ def callmenuFunc(menubar, root):
             fig, ax = plt.subplots()
 
             dates = []
-            income_cost=[]
-            for i in range(30):
+            expense_cost=[]
+            # if monint == 2:
+            #     if (yrint % 4) == 0 and (yrint % 100) == 0 and (yrint % 400) == 0:
+            #         days_num = 28
+            #     else:
+            #         days_num = 29
+            # elif monint == 1 or 3 or 5 or 7 or 8 or 10 or 12: 
+            #     days_num = 31
+            # elif monint == 4 or 6 or 9 or 11:
+            #     days_num = 30
+            #     print('days are 30')
+            print('days')
+            print(days_num)
+            for i in range(days_num):
                 dates.append(i+1)
             dates = tuple(dates)
 
             db = sqlite3.connect('myspendmate.db')
             cursor = db.cursor()
-            for i in range(30):
+            for i in range(days_num):
                 val = i+1
                 cursor.execute("select sum(amount) from expense where day=? AND month=? AND year=?", (val,mon,yr))
                 total_income = cursor.fetchone()[0]
                 if total_income == None:
                     total_income = 0 
-                income_cost.append(total_income)
+                expense_cost.append(total_income)
 
-            y_pos = np.arange(len(dates))
-            ax.barh(y_pos, income_cost, align='center', alpha =0.5)
+            y_pos = np.arange(days_num)
+            ax.barh(y_pos, expense_cost, align='center', alpha =0.5)
             ax.set_yticks(y_pos)
             ax.set_yticklabels(dates)
             ax.invert_yaxis()
             ax.set_ylabel('Date')
-            ax.set_xlabel('Income')
+            ax.set_xlabel('Expense')
             ax.set_title('Day Wise Expense')
             plt.savefig('barexpense.png',dpi=100)  
             # plt.show()
-
-
+            # =========================================================================================
+                
+            mon_name = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
             # ==========================================================================================
             pdf = FPDF()
@@ -534,7 +563,7 @@ def callmenuFunc(menubar, root):
             pdf.cell(90, 3, " ", 0, 2, 'C')
             pdf.cell(75, 10, "SpendMate - Your Money Manager", 0, 2, 'C')
             pdf.cell(90, 3, " ", 0, 2, 'C')
-            pdf.cell(75, 10, "A Tabular and Graphical Report of Income", 0, 2, 'C')
+            pdf.cell(75, 10, "A Tabular and Graphical Report of Income for "+ str(mon_name[int(mon)-1]) + " " + str(yr), 0, 2, 'C')
             pdf.cell(90, 5, " ", 0, 2, 'C')
             pdf.cell(-40)
             pdf.cell(20, 10, 'amount', 1, 0, 'C')
@@ -560,9 +589,10 @@ def callmenuFunc(menubar, root):
             # ======================================================================================
 
             pdf.add_page()
+            pdf.set_font('arial', 'B', 12)
             pdf.cell(45)
             pdf.cell(90, 3, " ", 0, 2, 'C')
-            pdf.cell(75, 10, "A Tabular and Graphical Report of Expense", 0, 2, 'C')
+            pdf.cell(75, 10, "A Tabular and Graphical Report of Expense for "+ str(mon_name[int(mon)-1])+ " " + str(yr), 0, 2, 'C')
             pdf.cell(90, 5, " ", 0, 2, 'C')
             pdf.cell(-40)
             pdf.cell(20, 10, 'amount', 1, 0, 'C')
