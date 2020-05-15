@@ -96,6 +96,7 @@ def callGoals(root):
             # print(tv.item(curItem))
             tv.delete(selected_item)
             seegoals.destroy()
+            callGoals(root)
             
         def selectItem(a):
             curItem = tv.focus()
@@ -156,7 +157,7 @@ def callGoals(root):
         rootlabel = ttk.Label(labelframe_2, text="Enter the following fields ", width=30, font=("bold", 10))  
         rootlabel.grid(row=2,column = 0,columnspan = 4,padx = 10, pady=4)
 
-        label_1 = ttk.Label(labelframe_2, text="Goal Name ",width=30,font=("bold", 10))
+        label_1 = ttk.Label(labelframe_2, text="Goal Name (Max Char = 32)",width=30,font=("bold", 10))
         label_1.grid(row=3,column = 0,columnspan = 4, pady=4)
 
         entry_1 = Entry(labelframe_2, bd=5)
@@ -213,7 +214,7 @@ def callGoals(root):
         # label_1 = ttk.Label(ingoal, text="Goal Target Value",width=20,font=("bold", 10))
         # label_1.place(x=60,y=180)
 
-        label_1 = ttk.Label(labelframe_2, text="Goal Target Value (Max Char = 32)",width=30,font=("bold", 10))
+        label_1 = ttk.Label(labelframe_2, text="Goal Target Value",width=30,font=("bold", 10))
         label_1.grid(row=5,column = 0,columnspan = 4, pady=4)
 
         entry_2 = Entry(labelframe_2, bd=5)

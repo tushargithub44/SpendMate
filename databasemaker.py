@@ -18,20 +18,20 @@ def makedatabase():
     # ----------------------------------------------------------------------------------
     cursor.execute("CREATE TABLE IF NOT EXISTS incomeCat (category TEXT NOT NULL UNIQUE)")
     cursor.execute("SELECT * FROM incomeCat")
-    status1 = cursor.fetchone()[0]
-    if(status1=='None'):
+    status1 = cursor.fetchone()
+    if(status1==None):
         cursor.execute("insert into incomeCat values('%s')"%('Salary'))
     # ----------------------------------------------------------------------------------
     cursor.execute("CREATE TABLE IF NOT EXISTS expenseCat (category TEXT NOT NULL UNIQUE)")
     cursor.execute("SELECT * FROM expenseCat")
-    status2 = cursor.fetchone()[0]
-    if(status2=='None'):
+    status2 = cursor.fetchone()
+    if(status2==None):
         cursor.execute("insert into expenseCat values('%s')"%('HealthCare'))
     # ----------------------------------------------------------------------------------
     cursor.execute("CREATE TABLE IF NOT EXISTS Account (Account_Name TEXT NOT NULL UNIQUE)")
     cursor.execute("SELECT * FROM Account")
-    status3 = cursor.fetchone()[0]
-    if(status3=='None'):
+    status3 = cursor.fetchone()
+    if(status3==None):
         cursor.execute("insert into Account values('%s')"%('Cash'))
     # ----------------------------------------------------------------------------------
     cursor.close()

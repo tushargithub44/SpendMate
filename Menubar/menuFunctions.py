@@ -352,7 +352,7 @@ def callmenuFunc(menubar, root):
             cursor = db.cursor()
             for i in range(30):
                 val = i+1
-                cursor.execute("select sum(amount) from income where day=? AND month=? AND year=?", (val,2,2018))
+                cursor.execute("select sum(amount) from income where day=? AND month=? AND year=?", (val,mon,yr))
                 total_income = cursor.fetchone()[0]
                 if total_income == None:
                     total_income = 0 
@@ -364,6 +364,7 @@ def callmenuFunc(menubar, root):
             ax.set_yticklabels(dates)
             ax.invert_yaxis()
             ax.set_ylabel('Date')
+            print(income_cost)
             ax.set_xlabel('Income')
             ax.set_title('Day Wise Income')
             plt.savefig('barincome.png',dpi=100)  
@@ -490,7 +491,7 @@ def callmenuFunc(menubar, root):
             cursor = db.cursor()
             for i in range(30):
                 val = i+1
-                cursor.execute("select sum(amount) from expense where day=? AND month=? AND year=?", (val,2,2020))
+                cursor.execute("select sum(amount) from expense where day=? AND month=? AND year=?", (val,mon,yr))
                 total_income = cursor.fetchone()[0]
                 if total_income == None:
                     total_income = 0 
