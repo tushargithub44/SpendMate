@@ -7,7 +7,6 @@ from tkinter import messagebox
 import matplotlib.pyplot as plt
 from PIL import Image, ImageTk
 import PIL.Image
-from tkhtmlview import HTMLLabel
 import webbrowser
 from Main_Window.theme import ttk_theme
 

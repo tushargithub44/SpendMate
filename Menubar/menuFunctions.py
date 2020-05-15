@@ -44,11 +44,15 @@ def callmenuFunc(menubar, root):
             Ac.resizable(False, False)
             Ac.title('Add Categories')
 
-            label_1 = ttk.Label(Ac, text="Enter Category Name",width=20,font=("bold", 10))
-            label_1.pack()
+            labelframe2 = ttk.LabelFrame(Ac, text="Add Category")  
+            labelframe2.grid(row=1,column = 3, rowspan = 2, columnspan=2, sticky='WE', \
+                    padx=30, pady=30, ipadx=30, ipady=30)
 
-            entry_1 = Entry(Ac, bd=5)
-            entry_1.pack()
+            label_1 = ttk.Label(labelframe2, text="Enter Category Name",width=20,font=("bold", 10))
+            label_1.grid()
+
+            entry_1 = Entry(labelframe2, bd=5)
+            entry_1.grid()
             
             def addCat():
                 s = entry_1.get()
@@ -63,8 +67,8 @@ def callmenuFunc(menubar, root):
             def Acexit():
                 Ac.destroy()
 
-            savebutton = ttk.Button(Ac, text = 'Save and Exit',command = addCat) 
-            savebutton.pack(padx=20, pady=20)
+            savebutton = ttk.Button(labelframe2, text = 'Save and Exit',command = addCat) 
+            savebutton.grid()
             # Ac.destroy()
             
 
@@ -118,11 +122,15 @@ def callmenuFunc(menubar, root):
             Ac.resizable(False, False)
             Ac.title('Add Categories')
 
-            label_1 = ttk.Label(Ac, text="Enter Category Name",width=20,font=("bold", 10))
-            label_1.pack()
+            labelframe2 = ttk.LabelFrame(Ac, text="Add Category")  
+            labelframe2.grid(row=1,column = 3, rowspan = 2, columnspan=2, sticky='WE', \
+                    padx=30, pady=30, ipadx=30, ipady=30)
 
-            entry_1 = Entry(Ac, bd=5)
-            entry_1.pack()
+            label_1 = ttk.Label(labelframe2, text="Enter Category Name",width=20,font=("bold", 10))
+            label_1.grid()
+
+            entry_1 = Entry(labelframe2, bd=5)
+            entry_1.grid()
             
             def addCat(): 
                 s = entry_1.get()
@@ -137,8 +145,8 @@ def callmenuFunc(menubar, root):
             def Acexit():
                 Ac.destroy()
 
-            savebutton = ttk.Button(Ac, text = 'Save and Exit',command = addCat) 
-            savebutton.pack(padx=20, pady=20)
+            savebutton = ttk.Button(labelframe2, text = 'Save and Exit',command = addCat) 
+            savebutton.grid()
             # Ac.destroy()
 
         def Get():
@@ -252,11 +260,16 @@ def callmenuFunc(menubar, root):
             # Ac.geometry('250x150')
             Ac.title('Add Account')
 
-            label_1 = ttk.Label(Ac, text="Enter Account Name",width=20,font=("bold", 10))
-            label_1.pack()
+            labelframe2 = ttk.LabelFrame(Ac, text="Add Category")  
+            labelframe2.grid(row=1,column = 3, rowspan = 2, columnspan=2, sticky='WE', \
+                    padx=30, pady=30, ipadx=30, ipady=30)
 
-            entry_1 = Entry(Ac, bd=5)
-            entry_1.pack()
+            label_1 = ttk.Label(labelframe2, text="Enter Account Name",width=20,font=("bold", 10))
+            label_1.grid()
+
+            entry_1 = Entry(labelframe2, bd=5)
+            entry_1.grid()
+
             def addCat(): 
                 s = entry_1.get()
                 db = sqlite3.connect('myspendmate.db')
@@ -270,8 +283,8 @@ def callmenuFunc(menubar, root):
             def Acexit():
                 Ac.destroy()
 
-            savebutton = ttk.Button(Ac, text = 'Save and Exit',command = addCat) 
-            savebutton.pack(padx=20, pady=20)
+            savebutton = ttk.Button(labelframe2, text = 'Save and Exit',command = addCat) 
+            savebutton.grid()
 
         def Get():
             GetC = ThemedTk(theme = ttk_theme, themebg = True)

@@ -73,7 +73,7 @@ def callBudget(root):
             style.configure("BW.TLabel", background="yellow")
             budgetlabel2 = ttk.Label(budgetframe1, text="Message :")  
             budgetlabel2.grid(row = 5, column = 0, pady =2)
-            budgetlabel2 = ttk.Label(budgetframe1, text="!!!BUDGET EXCEEDED!!!", style="BW.TLabel")  
+            budgetlabel2 = ttk.Label(budgetframe1, text="!!BUDGET EXCEEDED!!", style="BW.TLabel")  
             budgetlabel2.grid(row = 5, column = 1, pady =2)
         else:
             budgetlabel2 = ttk.Label(budgetframe1, text="Message :")  
