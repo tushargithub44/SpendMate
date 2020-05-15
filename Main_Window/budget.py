@@ -55,6 +55,7 @@ def callBudget(root):
     db.close()
 
     if check == 1:
+        print('Check is 1')
         CurrencyCurrent = CurrentCurrr()
         budgetlabel = ttk.Label(budgetframe1, text="Total Budget :")  
         budgetlabel.grid(row = 3, column = 0)  
@@ -78,18 +79,23 @@ def callBudget(root):
             budgetlabel2.grid(row = 5, column = 1, pady =2)
 
     else:
-        budgetlabel = ttk.Label(budgetframe1, text=" Total Budget : Not Set")  
-        budgetlabel.grid()  
-        Spentlabel = ttk.Label(budgetframe1, text="")  
-        Spentlabel.grid()
-        budgetlabel2 = ttk.Label(budgetframe1, text="")  
-        budgetlabel2.grid()  
+        print('Check is None')
+        budgetlabel = ttk.Label(budgetframe1, text="Total Budget :")  
+        budgetlabel.grid(row = 3, column = 0)  
+        budgetlabel1 = ttk.Label(budgetframe1, text="Not set" + CurrencyCurrent)  
+        budgetlabel1.grid(row = 3, column = 1)  
+        budgetlabel1.config(font=("Courier", 13))  
+        Spentlabel = ttk.Label(budgetframe1, text="Percentage Set :")  
+        Spentlabel.grid(row = 4, column = 0)  
+        Spentlabel1 = ttk.Label(budgetframe1, text="Not set%")  
+        Spentlabel1.grid(row = 4, column = 1)
+        Spentlabel1.config(font=("Courier", 13))  
     budgetamt=0
 
     def ManageBudget():
         income = ThemedTk(theme = "xpnative", themebg = True)
         income.title("Manage Budget")
-
+        income.resizable(False, False)
         labelframe2 = ttk.LabelFrame(income, text="Set Month and Year")  
         labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
                 padx=30, pady=30, ipadx=30, ipady=30)

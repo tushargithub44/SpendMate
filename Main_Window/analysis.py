@@ -22,7 +22,7 @@ def callAnalysis(root):
     def displaypie():
         # Data to plot
         dispie = ThemedTk(theme = "xpnative", themebg = True)
-
+        dispie.resizable(False, False)
         dispie.title('Set Month and Year')
         labelframe2 = ttk.LabelFrame(dispie, text="Set Month and Year")  
         labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
@@ -139,7 +139,7 @@ def callAnalysis(root):
     def displaypie2():
         # Data to plot
         dispie2 = ThemedTk(theme = "xpnative", themebg = True)
-
+        dispie2.resizable(False, False)
         dispie2.title('Set Month and Year')
         labelframe2 = ttk.LabelFrame(dispie2, text="Set Month and Year")  
         labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
@@ -255,7 +255,7 @@ def callAnalysis(root):
 
     def barexpense():
         bar = ThemedTk(theme = "xpnative", themebg = True)
-
+        bar.resizable(False, False)
         bar.title('Set Month and Year')
         labelframe2 = ttk.LabelFrame(bar, text="Set Month and Year")  
         labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
@@ -345,6 +345,7 @@ def callAnalysis(root):
 
     def barincome():
         bar = ThemedTk(theme = "xpnative", themebg = True)
+        bar.resizable(False, False)
         bar.title('Set Month and Year')
         labelframe2 = ttk.LabelFrame(bar, text="Set Month and Year")  
         labelframe2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \

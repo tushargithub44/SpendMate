@@ -42,7 +42,7 @@ def callExpense(root):
     def AddExpense():
         expense = ThemedTk(theme = "xpnative", themebg = True)
         expense.title("Add Expense")
-
+        expense.resizable(False, False)
         labelframe_2 = ttk.LabelFrame(expense, text="Add Expense Entry")  
         labelframe_2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
                 padx=30, pady=30, ipadx=30, ipady=30)
@@ -242,7 +242,7 @@ def callExpense(root):
         tv.heading(3,text="Description")
         tv.heading(4,text="Category")
         tv.heading(5,text="Account_type")
-        expense1.geometry('1000x500')
+        # expense1.geometry('1000x500')
         expense1.title("Expense Details")
         expense1.resizable(False,False)
         db = sqlite3.connect('myspendmate.db')

@@ -149,7 +149,7 @@ def callGoals(root):
     def SetGoals():
         ingoal = ThemedTk(theme = "xpnative", themebg = True)
         ingoal.title("Add Goal")
-
+        ingoal.resizable(False, False)
         labelframe_2 = ttk.LabelFrame(ingoal, text="Add Goal ")  
         labelframe_2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
                 padx=30, pady=30, ipadx=30, ipady=30)

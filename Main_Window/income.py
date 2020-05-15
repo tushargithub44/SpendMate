@@ -43,7 +43,8 @@ def callincome(root):
         income = ThemedTk(theme = "xpnative", themebg = True)
         income.title("Add Income")
         print("Inside Button add income-------------------------")
-
+        income.resizable(False, False)
+        
         labelframe_2 = ttk.LabelFrame(income, text="Add Income Entry")  
         labelframe_2.grid(row=1,column = 2, rowspan = 6, columnspan=4, sticky='WE', \
                 padx=30, pady=30, ipadx=30, ipady=30)
@@ -234,8 +235,8 @@ def callincome(root):
 
 
     def GetData():
-        income = ThemedTk(theme = "xpnative", themebg = True)
-        frm = ttk.Frame(income)
+        income1 = ThemedTk(theme = "xpnative", themebg = True)
+        frm = ttk.Frame(income1)
         frm.pack(side=tk.LEFT,padx=20)
         
         tv=ttk.Treeview(frm,columns=(1,2,3,4,5) ,show="headings", height ='30')
@@ -245,9 +246,8 @@ def callincome(root):
         tv.heading(3,text="Description")
         tv.heading(4,text="Category")
         tv.heading(5,text="Account_type")
-        income.geometry('1000x500')
-        income.title("Income Details")
-        income.resizable(False,False)
+        # income1.geometry('1000x500')
+        income1.title("Income Details")
         db = sqlite3.connect('myspendmate.db')
         cursor = db.cursor()
         cursor.execute("SELECT amount,date,description,category,account_type FROM income ")
@@ -261,7 +261,7 @@ def callincome(root):
         db.commit()
         db.close
         print(list1)
-        income.mainloop()
+        income1.mainloop()
 
     # -------------------------Income Main window Section---------------------
       

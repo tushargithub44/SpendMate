@@ -24,7 +24,7 @@ from Menubar.menuOthers import *
 
 
 root = ThemedTk(theme = "xpnative", themebg = True)
-root.geometry("950x600")  
+# root.geometry("950x600")  
 root.title("SpendMate - Your Money Manager")
 root.iconphoto(True, tk.PhotoImage(file='SpendMate1.png'))
 root.resizable(False, False)

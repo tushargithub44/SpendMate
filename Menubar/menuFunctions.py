@@ -23,7 +23,8 @@ def callmenuFunc(menubar, root):
 
     def showCategories():
         categ = ThemedTk(theme = "xpnative", themebg = True)
-        categ.geometry('650x230')
+        # categ.geometry('650x230')
+        categ.resizable(False, False)
         categ.title("Categories")
 
 
@@ -38,7 +39,8 @@ def callmenuFunc(menubar, root):
 
         def AddCategories():
             Ac = ThemedTk(theme = "xpnative", themebg = True)
-            Ac.geometry('250x150')
+            # Ac.geometry('250x150')
+            Ac.resizable(False, False)
             Ac.title('Add Categories')
 
             label_1 = ttk.Label(Ac, text="Enter Category Name",width=20,font=("bold", 10))
@@ -73,9 +75,8 @@ def callmenuFunc(menubar, root):
             treev=ttk.Treeview(frm,columns=(1) ,show="headings", height ='30')
             treev.pack()
             treev.heading(1,text="Category Name")
-            GetC.geometry('250x600')
-            GetC.title("Income Details")
-            GetC.resizable(False,False)
+            # GetC.geometry('250x600')
+            GetC.title("Category List")
             db = sqlite3.connect('myspendmate.db')
             cursor = db.cursor()
             cursor.execute("select * from incomeCat")
@@ -112,7 +113,8 @@ def callmenuFunc(menubar, root):
 
         def Add():
             Ac = ThemedTk(theme = "xpnative", themebg = True)
-            Ac.geometry('250x150')
+            # Ac.geometry('250x150')
+            Ac.resizable(False, False)
             Ac.title('Add Categories')
 
             label_1 = ttk.Label(Ac, text="Enter Category Name",width=20,font=("bold", 10))
@@ -146,8 +148,8 @@ def callmenuFunc(menubar, root):
             treev=ttk.Treeview(frm,columns=(1) ,show="headings", height ='30')
             treev.pack()
             treev.heading(1,text="Category Name")
-            GetC.geometry('250x600')
-            GetC.title("Income Details")
+            # GetC.geometry('250x600')
+            GetC.title("Category List")
             GetC.resizable(False,False)
             db = sqlite3.connect('myspendmate.db')
             cursor = db.cursor()
@@ -177,19 +179,29 @@ def callmenuFunc(menubar, root):
 
 
 # ============================= Set-Currency ========================================================
+
+    
     def setCurrency():
         print("Set Currency here!")
         Currency = ThemedTk(theme = "xpnative", themebg = True)
-        Currency.geometry('250x100')
+        Currency.resizable(False, False)
+        # Currency.geometry('250x100')
         Currency.title("Set Currency")
 
-        label_1 = ttk.Label(Currency, text="Select Currency here",width=20,font=("bold", 10))
+        labelframe3 = ttk.LabelFrame(Currency, text="Expense")  
+        labelframe3.grid(row=1,column = 6, rowspan = 2, columnspan=2, sticky='WE', \
+                padx=30, pady=30, ipadx=30, ipady=30)
+
+        rootlabel = ttk.Label(labelframe3, text="Categories Details")  
+        rootlabel.grid()
+
+        label_1 = ttk.Label(labelframe3, text="Select Currency here",width=20,font=("bold", 10))
         label_1.grid(row = 0, column = 1, pady = 2)
 
         country_list = ["INR", "USD", "CAD", "CNY", "DKK", "EUR"] 
         Symbol = ["₹", "$", "$", "¥", "kr", "€"]
         
-        cb = ttk.Combobox(Currency,values=country_list,width=10)
+        cb = ttk.Combobox(labelframe3,values=country_list,width=10)
         cb.grid(row = 1, column = 1, pady = 2)
         cb.current(0)
 
@@ -215,13 +227,14 @@ def callmenuFunc(menubar, root):
             callExpense(root)
             callBudget(root)
 
-        savebutton = ttk.Button(Currency, text = 'Save and Exit',command = SaveCurrency) 
+        savebutton = ttk.Button(labelframe3, text = 'Save and Exit',command = SaveCurrency) 
         savebutton.grid(row = 2, column = 1, pady = 2)
         
 # ============================= Account Setup ========================================================
     def AccountSetup():
         print("Account Setup")
         accsetup = ThemedTk(theme = "xpnative", themebg = True)
+        accsetup.resizable(False, False)
         # accsetup.geometry('500x230')
         accsetup.title("Accounts")
 
@@ -234,7 +247,8 @@ def callmenuFunc(menubar, root):
 
         def Add():
             Ac = Tk()
-            Ac.geometry('250x150')
+            Ac.resizable(False, False)
+            # Ac.geometry('250x150')
             Ac.title('Add Account')
 
             label_1 = ttk.Label(Ac, text="Enter Account Name",width=20,font=("bold", 10))
@@ -266,9 +280,9 @@ def callmenuFunc(menubar, root):
             treev=ttk.Treeview(frm,columns=(1) ,show="headings", height ='30')
             treev.pack()
             treev.heading(1,text="Account Name")
-            GetC.geometry('250x600')
-            GetC.title("Income Details")
-            GetC.resizable(False,False)
+            # GetC.geometry('250x600')
+            GetC.title("Accounts List")
+            # GetC.resizable(False,False)
             db = sqlite3.connect('myspendmate.db')
             cursor = db.cursor()
             cursor.execute("select * from Account")
