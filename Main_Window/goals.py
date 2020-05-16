@@ -20,7 +20,7 @@ def callGoals(root):
     
     db = sqlite3.connect('myspendmate.db')
     cursor = db.cursor()
-    cursor.execute("SELECT COUNT(*) FROM goals;")  # (name TEXT NOT NULL, enddate TEXT NOT NULL, target_value INT NOT NULL, current_value INT NOT NULL, description TEXT,day INT NOT NULL,month INT NOT NULL,year INT NOT NULL)"
+    cursor.execute("SELECT COUNT(*) FROM goals;") 
     countgoals = cursor.fetchone()[0]
     if(countgoals=='None'):
         countgoals=str(0)
@@ -33,13 +33,6 @@ def callGoals(root):
     db.commit()
     db.close   
 
-    # def ManageGoals():
-        # Goals = Tk()
-        # Goals.geometry('300x300')
-        # Goals.title("Manage Budget")
-
-        # label_1 = Label(Goals, text="Your Goals",width=20,font=("bold", 10))
-        # label_1.place(x=170,y=20)
     
     def SeeGoals():
         seegoals = ThemedTk(theme = ttk_theme, themebg = True)
@@ -72,7 +65,6 @@ def callGoals(root):
                 db.close()
                 newwin.destroy()
             changebtn = ttk.Button(newwin, text="Save Changes",command = change)
-            # changebtn.grid(column = 1, row = 3)
             changebtn.grid(row=2, columnspan = 2)
             print(qas['values'][0])
             print('-------------------going out-------------------')
@@ -114,12 +106,7 @@ def callGoals(root):
         gframe.pack(padx=20)
         tv=ttk.Treeview(gframe,columns=(1,2,3,4,5) ,show="headings", height ='30')
         tv.pack()
-        # scrlbar = ttk.Scrollbar(seegoals,  
-        #                orient ="vertical",  
-        #                command = tv.yview) 
-        
-        # scrlbar.pack(side ='right', fill ='x')
-        # tv.configure(xscrollcommand = scrlbar.set)
+ 
 
         tv.heading(1,text="Goal Name")
         tv.heading(2,text="Date")
@@ -141,7 +128,7 @@ def callGoals(root):
         db.commit()
         db.close
         print(list1)
-        # tv.bind("<ButtonRelease-1>", deleteit)
+      
         tv.bind('<ButtonRelease-1>', selectItem)
         seegoals.mainloop()
 
@@ -164,11 +151,6 @@ def callGoals(root):
         entry_1 = Entry(labelframe_2, bd=5)
         entry_1.grid(row=3,column = 4, pady=4)
 
-        # label_1 = ttk.Label(ingoal, text="Goal Name",width=20,font=("bold", 10))
-        # label_1.place(x=60,y=60)
-
-        # entry_1 = Entry(ingoal, bd=5)
-        # entry_1.place(x=240,y=60)
         def printamount():
             s = entry_1.get()
             print('Goal Name: ' + s)
@@ -186,18 +168,18 @@ def callGoals(root):
                     labelstatus = ttk.Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
                     label_3 = ttk.Label(labelframe_2, text=dateselected,width=30,font=("bold", 10))
                     label_3.grid(row=4,column = 6, pady=4)
-                    # cal.see(datetime.date(year=2020, month=5, day=7))
+            
                     top.destroy()
                     return dateselected
 
                 top = Toplevel(ingoal)
-                # top.geometry('500x500')
+     
                 import datetime
                 today = datetime.date.today()
 
                 mindate = datetime.date(year=2000, month=5, day=1)
                 maxdate = today + datetime.timedelta(days=100)
-                # print(mindate, maxdate)
+        
 
                 cal = Calendar(top, font="Arial 14", selectmode='day', locale='en_US',
                             mindate=mindate, maxdate=maxdate, disabledforeground='red',
@@ -205,16 +187,14 @@ def callGoals(root):
                 cal.pack(fill="both", expand=True)
                 incomebtn2 = ttk.Button(top, text="Select", command=print_sel).pack() 
                 
-                # tk.top.destroy()
+
 
 
 
         incomebtn = ttk.Button(labelframe_2, text='Enter Date', command = dateSelector)
         incomebtn.grid(row=4,column = 4, pady=4)
 
-        # label_1 = ttk.Label(ingoal, text="Goal Target Value",width=20,font=("bold", 10))
-        # label_1.place(x=60,y=180)
-
+     
         label_1 = ttk.Label(labelframe_2, text="Goal Target Value",width=30,font=("bold", 10))
         label_1.grid(row=5,column = 0,columnspan = 4, pady=4)
 
@@ -229,10 +209,7 @@ def callGoals(root):
                 entry_1.delete(0, END)
                 entry_1.insert(0, "")
                 return "stop"
-            
 
-        # label_1 = ttk.Label(ingoal, text="Current Value",width=20,font=("bold", 10))
-        # label_1.place(x=60,y=240)
 
         label_1 = ttk.Label(labelframe_2, text="Current Value",width=30,font=("bold", 10))
         label_1.grid(row=6,column=0,columnspan = 4, pady=4)
@@ -294,22 +271,16 @@ def callGoals(root):
             db.close
             return "done"
 
-        # label_1 = Label(income, text="Payment Recieved?",width=20,font=("bold", 10))
-        # label_1.place(x=60,y=360)
         def incomeexit():
             ingoal.destroy()
 
         def AllinOne():
-            # printamount()
-            # printdescription()
-            # printcategory()
-            # printaccount()
+
 
             status = put()
             if status == "done":
                 messagebox.showinfo("Success!!","Goal Entry have been saved")
-            # if status == "stopped":
-            #     AllinOne()
+  
             incomeexit()
             pass 
 
@@ -317,20 +288,6 @@ def callGoals(root):
         savebutton.grid(row=8, column = 0, columnspan = 6, pady=4)
 
 
-        # seegoalbtn = Button(Goals, text = 'See Your Goals', command = SeeGoals) 
-        # seegoalbtn.pack()
-
-        # addgoalbtn = Button(Goals, text = 'Add a Goal', command = SetGoals) 
-        # addgoalbtn.pack()
-
-        # progress = Progressbar(root, orient = HORIZONTAL, 
-        #         length = 100, mode = 'indeterminate') 
-        # progress['value'] = 20
-
-
-
-    # btn1 = Button(labelframe1, text = 'Manage Goals', command = ManageGoals) 
-    # btn1.grid()
     seegoalbtn = ttk.Button(labelframe1, text = 'See Your Goals', command = SeeGoals) 
     seegoalbtn.grid(row = 5, column = 1,pady=4)
 

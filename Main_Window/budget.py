@@ -135,11 +135,6 @@ def callBudget(root):
         entry_2 = Entry(labelframe2, bd=5)
         entry_2.grid(row=6, column = 0, pady=4)
 
-        # label_2 = ttk.Label(income, text="Set Percentage to Notify:",width=30,font=("bold", 10))
-        # label_2.place(x=30,y=120)
-
-        # entry_2 = Entry(income, bd=5)
-        # entry_2.place(x=240,y=120)
         def printper():
             s = int(entry_2.get())
             if s>100 or s<0:

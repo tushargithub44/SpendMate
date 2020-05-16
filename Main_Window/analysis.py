@@ -97,10 +97,6 @@ def callAnalysis(root):
                     amt_expe[ppcount] = amt_expe[ppcount] + amt_category
                     sizes[ppcount] = float((amt_expe[ppcount]*100)/total_expense)
 
-            # colors_all = []
-            # colors = []
-            # for j in count:
-            #     colors.append()
 
             tobe = sizes.index(max(sizes))
             print('tobe is : ' + str(tobe))
@@ -212,10 +208,6 @@ def callAnalysis(root):
                     amt_expe[ppcount] = amt_expe[ppcount] + amt_category
                     sizes[ppcount] = float((amt_expe[ppcount]*100)/total_expense)
 
-            # colors_all = []
-            # colors = []
-            # for j in count:
-            #     colors.append()
 
             tobe = sizes.index(max(sizes))
             print('tobe is : ' + str(tobe))

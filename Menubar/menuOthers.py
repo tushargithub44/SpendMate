@@ -57,7 +57,7 @@ def callmenuOther(menubar):
         link1 = Label(labelframe2, text="Click here",width=30,font=("bold", 10), fg="blue", cursor="hand2")
         link1.configure(anchor="center")
         link1.grid()
-        link1.bind("<Button-1>", lambda e: callback("http://www.google.com"))
+        link1.bind("<Button-1>", lambda e: callback("https://docs.google.com/document/d/e/2PACX-1vQn_2oSdxNJglxhb0F_3OS6h94MO6FGFWZdYHcEoaNBHjI-U7sBWdCMlCo0PhWbSzzBHl1dJFCmbqry/pub"))
 
 
     othersmenu = Menu(menubar, tearoff = 0, activeborderwidth = 3, bd = 3)

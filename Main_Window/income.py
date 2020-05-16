@@ -14,7 +14,6 @@ from ttkthemes import ThemedTk
 
 db = sqlite3.connect('myspendmate.db')
 cursor = db.cursor()
-# cursor.execute("CREATE TABLE IF NOT EXISTS incomeee (amount INT NOT NULL, date TEXT NOT NULL, description TEXT , category TEXT NOT NULL ,account_type TEXT NOT NULL,day INT NOT NULL,month INT NOT NULL,year INT NOT NULL)")
 cursor.execute("select sum(amount) from income")
 sum1 = cursor.fetchone()[0]
 if(sum1=='None'):
@@ -59,11 +58,6 @@ def callincome(root):
         entry_1 = Entry(labelframe_2, bd=5)
         entry_1.grid(row=3,column = 4, pady=4)
 
-        # label_1 = ttk.Label(income, text="Enter Amount",width=20,font=("bold", 10))
-        # label_1.place(x=60,y=60)
-
-        # entry_1 = Entry(income, bd=5)
-        # entry_1.place(x=240,y=60)
         def printamount():
             s = entry_1.get()
             print("s")
@@ -82,8 +76,7 @@ def callincome(root):
         label_2 = ttk.Label(labelframe_2, text="Select Date",width=30,font=("bold", 10))
         label_2.grid(row=4,column = 0,columnspan = 4, pady=4)
         
-        # label_2 = ttk.Label(income, text="Select Date",width=20,font=("bold", 10))
-        # label_2.place(x=60,y=120)
+    
         def dateSelector():
                 
             def print_sel():
@@ -96,14 +89,12 @@ def callincome(root):
                 labelstatus = ttk.Label(top, text="Close this window.",width=20,font=("bold", 12)).pack()
                 label_3 = ttk.Label(labelframe_2, text=dateselected,width=30,font=("bold", 10))
                 label_3.grid(row=4,column = 6, pady=4)
-                # cal.see(datetime.date(year=2016, month=2, day=5))
                 date = str(cal.selection_get())
                 top.destroy()
                     
                     
 
             top = Toplevel(income)
-            # top.geometry('500x500')
             import datetime
             today = datetime.date.today()
 
@@ -130,11 +121,7 @@ def callincome(root):
 
         entry_2 = Entry(labelframe_2, bd=5)
         entry_2.grid(row=5,column = 4, pady=4)
-        # label_1 = ttk.Label(income, text="Description",width=20,font=("bold", 10))
-        # label_1.place(x=60,y=180)
 
-        # entry_2 = Entry(income,bd = 5)
-        # entry_2.place(x=240,y=180)
         def printdescription():
             s2 = entry_2.get()
             desc = str(entry_2.get())
@@ -171,8 +158,7 @@ def callincome(root):
         cursor = db.cursor()
         cursor.execute("select * from Account")
         acc_list=cursor.fetchall()
-        # print("-------------incomeCat--------------")
-        # print(cat_list)
+
         Account = []
         for i in acc_list:
             Account.append(i[0])
@@ -213,18 +199,12 @@ def callincome(root):
             callbalance(root)
             return "done"
             
-        
-        
 
-        # label_1 = Label(income, text="Payment Recieved?",width=20,font=("bold", 10))
-        # label_1.place(x=60,y=360)
         def incomeexit():
             income.destroy()
 
         def AllinOne():
             status = put()
-            # if status == "stopped":
-            #     AllinOne()
             if status == "done":
                 messagebox.showinfo("Success!!","Income Entry have been saved")
             incomeexit()

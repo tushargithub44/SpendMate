@@ -217,9 +217,6 @@ def callmenuFunc(menubar, root):
         def SaveCurrency():
             getCountry = cb.get()
             index = country_list.index(str(getCountry))
-            # print("country: " + str(cb.get()))
-            # print("index : " + str(index))
-            # print("Symbol: " + str(Symbol[index]))
             db = sqlite3.connect('myspendmate.db')
             cursor = db.cursor()
             cursor.execute("select * from Currency")
@@ -526,16 +523,6 @@ def callmenuFunc(menubar, root):
 
             dates = []
             expense_cost=[]
-            # if monint == 2:
-            #     if (yrint % 4) == 0 and (yrint % 100) == 0 and (yrint % 400) == 0:
-            #         days_num = 28
-            #     else:
-            #         days_num = 29
-            # elif monint == 1 or 3 or 5 or 7 or 8 or 10 or 12: 
-            #     days_num = 31
-            # elif monint == 4 or 6 or 9 or 11:
-            #     days_num = 30
-            #     print('days are 30')
             print('days')
             print(days_num)
             for i in range(days_num):

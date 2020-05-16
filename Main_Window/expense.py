@@ -57,11 +57,6 @@ def callExpense(root):
         entry_1 = Entry(labelframe_2, bd=5)
         entry_1.grid(row=3,column = 4, pady=4)
 
-        # label_1 = ttk.Label(expense, text="Enter Amount",width=20,font=("bold", 10))
-        # label_1.place(x=60,y=60)
-
-        # entry_1 = Entry(expense, bd=5)
-        # entry_1.place(x=240,y=60)
 
         def printamount():
             s = entry_1.get()
@@ -78,8 +73,6 @@ def callExpense(root):
         label_2 = ttk.Label(labelframe_2, text="Select Date",width=30,font=("bold", 10))
         label_2.grid(row=4,column = 0,columnspan = 4, pady=4)
 
-        # label_2 = ttk.Label(expense, text="Select Date",width=20,font=("bold", 10))
-        # label_2.place(x=60,y=120)
         def dateSelector():
                 def print_sel():
                     global date_selected
@@ -122,14 +115,6 @@ def callExpense(root):
         entry_2 = Entry(labelframe_2, bd=5)
         entry_2.grid(row=5,column = 4, pady=4)
 
-        # expensebtn = ttk.Button(expense, text='Enter Date', command = dateSelector)
-        # expensebtn.place(x=240,y=120)
-
-        # label_1 = ttk.Label(expense, text="Description",width=20,font=("bold", 10))
-        # label_1.place(x=60,y=180)
-
-        # entry_2 = Entry(expense,bd = 5)
-        # entry_2.place(x=240,y=180)
         def printdescription():
             s2 = entry_2.get()
             print('Description: ' + s2)
