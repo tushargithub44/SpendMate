@@ -43,14 +43,17 @@ User Manual
 ------------------------------------------
 
 <div align="center">
-<h3 align="center">App Demo</h3>
 <br>
 <p align="center">
-  <img src ="./assets/images/image32.png" width = 500px>
+  <img src ="./assets/images/image37.png" width = 500px>
 </p>
+<h3 align="center">Application Demo</h3>
+<br>
 <p align="center">
   <img src ="./assets/gif/Part-1.gif" width = 500px>
 </p>
+<h3 align="center">Report Feature Demo</h3>
+<br>
 <p align="center">
   <img src ="./assets/gif/Part-2.gif" width = 500px>
 </p>
