@@ -48,6 +48,12 @@ User Manual
 <p align="center">
   <img src ="./assets/images/image32.png" width = 500px>
 </p>
+<p align="center">
+  <img src ="./assets/gif/Part-1.gif" width = 500px>
+</p>
+<p align="center">
+  <img src ="./assets/gif/Part-2.gif" width = 500px>
+</p>
 <br>
   
 
