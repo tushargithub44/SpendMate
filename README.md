@@ -9,8 +9,9 @@
 </p>  
 
 
-[![](https://img.shields.io/badge/Made_with-Python3-blue?style=for-the-badge&logo=python)](https://www.python.org "Python3")
-[![](https://img.shields.io/badge/IDE-Visual_Studio_Code-red?style=for-the-badge&logo=visual-studio-code)](https://code.visualstudio.com/  "Visual Studio Code")
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[![](https://img.shields.io/badge/Made_with-tkinter-blue?style=for-the-badge)](https://docs.python.org/3/library/tk.html)
+&emsp;[![](https://img.shields.io/badge/Made_with-sqlite3-blue?style=for-the-badge)](https://docs.python.org/2/library/sqlite3.html)
+&emsp;[![](https://img.shields.io/badge/IDE-Visual_Studio_Code-blue?style=for-the-badge&logo=visual-studio-code)](https://code.visualstudio.com/  "Visual Studio Code")
 
 
 
@@ -74,8 +75,14 @@ User Manual
 - [ ] Add more features.
 
 ------------------------------------------
-###             Tech stack
-Python ,Tkinter ,sqlite3 <br>
+### Libraries Used 
+
+- Tkinter 
+- Pandas
+- tkcalendar
+- ttkthemes 
+- matplotlib
+- Pillow
 
 ------------------------------------------
 ### Installing
